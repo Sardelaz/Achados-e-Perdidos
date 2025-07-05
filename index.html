@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achados e Perdidos ETEC</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Paleta de Cores Base (Opção A - Contraste e Vibrância) */
+        :root {
+            /* Cores do Modo Claro (ajustadas para suavidade e novo brilho) */
+            --primary-color: #3f6ebc;
+            /* Um azul um pouco mais suave para destaque */
+            --primary-bg: #d3dbe5;
+            /* Fundo principal: cinza mais escuro para a página toda */
+            --medium-bg: #f1f1f1bb;
+            /* Fundo de cards/seções: cinza muito claro, para substituir o branco */
+            --text-dark: #333333;
+            /* Texto escuro: permanece forte para leitura */
+            --text-light: #666666;
+            /* Texto mais leve: para descrições ou secundário */
+            --border-color: #c9d2de;
+            /* Cor de bordas para separação suave */
+            --button-primary-bg: #4a77cc;
+            /* Botão primário: um azul que se destaca mas é agradável */
+            --button-secondary-bg: #aebacd;
+            /* Botão secundário: cinza azulado suave */
+            --accent-color: #ffd700; /* Cor de destaque para detalhes, como bordas de foco, notificações */
+
+            /* Cores que podem ser usadas universalmente ou ajustadas por modo */
+            --darker-blue: #1A3B8A;
+            /* Azul escuro para detalhes, mantido para contraste */
+            --red-danger: #F44336;
+            --status-pending: #FFC107;
+            /* Amarelo para pendente */
+            --status-approved: #4CAF50;
+            /* Verde para aprovado */
+            --status-rejected: #F44336;
+            /* Vermelho para rejeitado */
+        }
+
+        /* Modo Noturno (Contraste e Harmonia) */
+        body.dark-mode {
+            /* Cores do Modo Escuro (ajustadas para contraste e harmonia) */
+            --primary-color: #7abaff;
+            /* Azul para destaque que brilha no escuro, mas não agride */
+            --primary-bg: #121e28;
+            /* Fundo principal: cinza azulado muito escuro (para o corpo da página) */
+            --medium-bg: #354e68;
+            /* Fundo de cards/seções: cinza azulado um pouco mais claro que o principal */
+            --header-footer-dark-bg: #295f94;
+            /* NOVO: Fundo mais escuro para cabeçalho e rodapé */
+            --text-dark: #e0e0e0;
+            /* Texto escuro (agora claro): quase branco */
+            --text-light: #b0b0b0;
+            /* Texto mais leve (agora claro): cinza claro */
+            --border-color: #3b526b;
+            /* Cor de bordas para separação sutil */
+            --button-primary-bg: #5f8fd4;
+            /* Botão primário: um azul vibrante para destacar */
+            --button-secondary-bg: #546a81;
+            /* Botão secundário: cinza azulado médio */
+            --accent-color: #ffd700; /* Cor de destaque para detalhes, como bordas de foco, notificações */
+
+
+            /* Adaptando as cores de dark-mode existentes para as novas variáveis */
+            --dark-mode-bg: var(--primary-bg);
+            --dark-mode-container-bg: var(--medium-bg);
+            --dark-mode-header-footer: var(--header-footer-dark-bg);
+            /* Usando a nova variável aqui */
+            --dark-mode-text: var(--text-dark);
+            --dark-mode-text-medium: var(--text-light);
+            --dark-mode-border: var(--border-color);
+            --dark-mode-input-bg: var(--medium-bg);
+            --dark-mode-input-border: var(--border-color);
+            --dark-mode-shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        /* CSS Geral */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: var(--primary-bg);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: var(--text-dark);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            background-color: var(--medium-bg);
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            max-width: 900px;
+            width: 95%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 5px solid var(--darker-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #FFFFFF;
+            font-size: 2.2em; /* Um pouco maior */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.8px; /* Mais compacto */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Sombra para o título */
+        }
+
+        header a {
+            text-decoration: none;
+            margin: 0;
+            color: #FFFFFF;
+            font-size: 1.2em; /* Um pouco maior */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.8px; /* Mais compacto */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Sombra para o título */
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .header-icons .icon-btn {
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            font-size: 1.8em; /* Ícones um pouco maiores */
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease, transform 0.2s ease, text-shadow 0.2s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Sombra para os ícones */
+        }
+
+        .header-icons .icon-btn:hover {
+            transform: scale(1.1);
+            color: var(--accent-color); /* Cor de destaque no hover */
+            text-shadow: 0 0 8px var(--accent-color); /* Efeito de brilho */
+        }
+
+        .header-icons .notification-count {
+            position: absolute;
+            top: -8px; /* Ajustado */
+            right: -8px; /* Ajustado */
+            background-color: var(--red-danger);
+            color: white;
+            border-radius: 50%;
+            padding: 4px 8px; /* Ajustado */
+            font-size: 0.8em; /* Ajustado */
+            font-weight: bold;
+            display: none;
+            min-width: 24px; /* Ajustado */
+            text-align: center;
+            line-height: 1.2;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Sombra mais forte */
+            animation: pulseNotification 1.5s infinite ease-in-out; /* Animação de pulsação */
+        }
+
+        /* Animação para o contador de notificações */
+        @keyframes pulseNotification {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            text-align: center;
+            padding: 15px 0; /* Mais padding */
+            font-size: 0.9em;
+            margin-top: auto;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+            transition: background-color 0.3s ease;
+        }
+
+        /* Classes de exibição de telas */
+        .screen {
+            display: none;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 20px 0;
+            animation: fadeIn 0.5s ease-out; /* Animação ao mostrar tela */
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* Animação de fade-in para telas */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Estilos gerais para botões */
+        button {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.05em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra padrão mais suave */
+        }
+
+        button.primary {
+            background-color: var(--button-primary-bg);
+            color: white;
+        }
+
+        button.primary:hover {
+            background-color: var(--darker-blue);
+            transform: translateY(-3px); /* Efeito mais pronunciado */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombra mais forte no hover */
+        }
+
+        button.secondary {
+            background-color: var(--button-secondary-bg);
+            color: white;
+        }
+
+        button.secondary:hover {
+            background-color: #8A8A8A;
+            transform: translateY(-3px); /* Efeito mais pronunciado */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Sombra mais forte no hover */
+        }
+
+        button.danger {
+            background-color: var(--red-danger);
+            color: white;
+        }
+
+        button.danger:hover {
+            background-color: #CD3328;
+            transform: translateY(-3px); /* Efeito mais pronunciado */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombra mais forte no hover */
+        }
+
+        /* Estilos para campos de input */
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        textarea,
+        select {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+            background-color: var(--medium-bg);
+            color: var(--text-dark);
+            transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.06); /* Sombra interna para profundidade */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3), inset 0 1px 3px rgba(0,0,0,0.1); /* Sombra de foco mais visível */
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark); /* Texto da label mais escuro para melhor contraste */
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.95em; /* Ligeiramente menor */
+        }
+
+        h2,
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 2em; /* Um pouco maior */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        h3 {
+            font-size: 1.6em; /* Um pouco maior */
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
+        }
+
+        .item-card,
+        .proof-card,
+        .my-proof-item {
+            background-color: var(--medium-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease, transform 0.2s ease;
+            overflow: hidden; /* Para garantir que o border-radius funcione com a imagem */
+        }
+
+        .item-card:hover,
+        .proof-card:hover,
+        .my-proof-item:hover {
+            transform: translateY(-5px); /* Efeito de levitar no hover */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Sombra mais pronunciada */
+        }
+
+        /* Animação para cards ao serem adicionados/carregados */
+        .item-card.animated,
+        .proof-card.animated,
+        .my-proof-item.animated {
+            animation: slideInUp 0.5s ease-out forwards;
+            opacity: 0; /* Começa invisível para a animação */
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .item-card img,
+        .proof-card img,
+        .my-proof-item img {
+            max-width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px; /* Cantos arredondados para a imagem */
+            margin-bottom: 15px;
+            background-color: var(--border-color);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Sombra para a imagem */
+            border: 1px solid var(--border-color); /* Borda sutil para a imagem */
+        }
+
+        .item-card h4,
+        .proof-card p,
+        .my-proof-item p {
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1em; /* Títulos dos cards um pouco maiores */
+        }
+
+        .item-card p,
+        .proof-card small,
+        .my-proof-item small {
+            font-size: 0.9em;
+            color: var(--text-light);
+            line-height: 1.4; /* Mais espaçamento entre linhas para descrições */
+        }
+
+        .item-card .primary,
+        .proof-card .primary,
+        .proof-card .danger,
+        .my-proof-item .primary {
+            margin-top: 20px;
+            width: calc(100% - 20px);
+            align-self: center;
+        }
+
+        .item-card .button-group,
+        .my-proof-item .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .my-proof-item .status-tag {
+            display: inline-block;
+            padding: 7px 14px; /* Mais padding */
+            border-radius: 20px; /* Mais arredondado */
+            font-weight: bold;
+            font-size: 0.9em; /* Um pouco maior */
+            margin-top: 10px;
+            color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Sombra para tags de status */
+        }
+
+        .my-proof-item .status-tag.pending {
+            background-color: var(--status-pending);
+            color: var(--text-dark);
+        }
+
+        .my-proof-item .status-tag.approved {
+            background-color: var(--status-approved);
+        }
+
+        .my-proof-item .status-tag.rejected {
+            background-color: var(--status-rejected);
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .filter-btn {
+            background-color: var(--border-color);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .filter-btn:hover:not(.active) {
+            background-color: #D5D5D5;
+        }
+
+        #notificationScreen #notificationMessages,
+        #myProofsScreen #myProofsContainer {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 15px;
+            margin-bottom: 25px;
+            margin-top: 20px;
+            padding: 15px; /* Adicionado padding para melhor visualização do scroll */
+        }
+
+        .notification-item {
+            background-color: var(--medium-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; /* Adicionada transição */
+            position: relative;
+        }
+        .notification-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .notification-item.unread {
+            background-color: rgba(var(--primary-color-rgb), 0.1);
+            border-left: 6px solid var(--primary-color);
+            padding-left: 15px;
+            font-weight: 600; /* Texto de notificação não lida mais negrito */
+        }
+
+        .notification-item .delete-notification {
+            background: none;
+            border: none;
+            color: var(--red-danger);
+            font-size: 0.95em;
+            cursor: pointer;
+            position: absolute;
+            bottom: 8px;
+            right: 15px;
+            padding: 5px 8px;
+            font-weight: 500;
+            border-radius: 5px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .notification-item .delete-notification:hover {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: #C0392B;
+        }
+
+        #globalMessage {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            text-align: center;
+            z-index: 1001;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            display: none;
+            animation: fadeInScale 0.3s ease forwards;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8); /* Começa menor */
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        #globalMessage p {
+            margin-bottom: 25px;
+            font-size: 1.4em; /* Um pouco maior */
+            font-weight: 500;
+        }
+
+        #globalMessage button {
+            margin: 0 10px;
+        }
+
+        .secretary-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .secretary-tabs button {
+            flex-grow: 1;
+            max-width: 220px;
+        }
+
+        #secretaryLogin form,
+        #addNewItemForm form {
+            max-width: 550px;
+            margin: 35px auto;
+            padding: 30px;
+            background-color: var(--medium-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-bottom: 25px;
+            margin-top: 8px;
+        }
+
+        .category-checkboxes label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            color: var(--text-dark); /* Mais visível */
+            cursor: pointer;
+        }
+
+        .category-checkboxes input[type="checkbox"] {
+            margin-right: 8px;
+            width: auto;
+            margin-bottom: 0;
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+
+        #itemPhotoPreview {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-top: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+
+        body.dark-mode {
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+        }
+
+        .dark-mode .container {
+            background-color: var(--medium-bg);
+            box-shadow: 0 6px 15px var(--dark-mode-shadow);
+        }
+
+        .dark-mode header,
+        .dark-mode footer {
+            background-color: var(--header-footer-dark-bg);
+            border-bottom-color: var(--darker-blue);
+        }
+
+        .dark-mode .header-icons .icon-btn {
+            color: var(--text-dark);
+        }
+        .dark-mode .header-icons .icon-btn:hover {
+            color: var(--accent-color);
+        }
+
+
+        .dark-mode h2,
+        .dark-mode h3 {
+            color: var(--primary-color) !important;
+        }
+
+        .dark-mode label {
+            color: var(--text-light);
+        }
+
+        .dark-mode input[type="text"],
+        .dark-mode input[type="password"],
+        .dark-mode input[type="email"],
+        .dark-mode textarea,
+        .dark-mode select {
+            background-color: var(--medium-bg);
+            color: var(--text-dark);
+            border-color: var(--border-color);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .dark-mode input[type="text"]:focus,
+        .dark-mode input[type="password"]:focus,
+        .dark-mode input[type="email"]:focus,
+        .dark-mode textarea:focus,
+        .dark-mode select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3), inset 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .dark-mode .filter-buttons button,
+        .dark-mode button.secondary {
+            background-color: var(--button-secondary-bg);
+            color: var(--text-dark);
+            border-color: var(--border-color);
+        }
+
+        .dark-mode .filter-buttons button:hover:not(.active),
+        .dark-mode button.secondary:hover {
+            background-color: #6A6A70;
+        }
+
+        .dark-mode .filter-btn.active,
+        .dark-mode button.primary {
+            background-color: var(--button-primary-bg);
+            border-color: var(--button-primary-bg);
+            color: white;
+        }
+
+        .dark-mode .filter-btn.active:hover,
+        .dark-mode button.primary:hover {
+            background-color: #4A8CF0;
+        }
+
+        .dark-mode button.danger {
+            background-color: #D65C50;
+        }
+
+        .dark-mode button.danger:hover {
+            background-color: #B24F44;
+        }
+
+        .dark-mode .item-card,
+        .dark-mode .proof-card,
+        .dark-mode .my-proof-item,
+        .dark-mode #secretaryLogin form,
+        .dark-mode #addNewItemForm form,
+        .dark-mode #proofsList,
+        .dark-mode #secretaryItemsList,
+        .dark-mode #addNewItemForm {
+            background-color: var(--medium-bg) !important;
+            box-shadow: 0 5px 15px var(--dark-mode-shadow);
+        }
+        .dark-mode .item-card:hover,
+        .dark-mode .proof-card:hover,
+        .dark-mode .my-proof-item:hover {
+            box-shadow: 0 8px 20px var(--dark-mode-shadow);
+        }
+
+
+        .dark-mode .item-card h4,
+        .dark-mode .item-card p,
+        .dark-mode .proof-card p,
+        .dark-mode .proof-card strong,
+        .dark-mode .notification-item p,
+        .dark-mode .notification-item strong,
+        .dark-mode .my-proof-item p,
+        .dark-mode .my-proof-item strong {
+            color: var(--text-dark) !important;
+        }
+
+        .dark-mode .item-card img,
+        .dark-mode .proof-card img,
+        .dark-mode .my-proof-item img {
+            background-color: var(--border-color);
+            border: 1px solid var(--dark-mode-border);
+        }
+
+        .dark-mode .notification-item,
+        .dark-mode .my-proof-item {
+            background-color: var(--medium-bg);
+            border-color: var(--border-color);
+        }
+
+        .dark-mode .notification-item.unread {
+            background-color: rgba(var(--primary-color-rgb), 0.1);
+            border-left-color: var(--primary-color);
+        }
+
+        .dark-mode .my-proof-item .status-tag.pending {
+            background-color: var(--status-pending);
+            color: var(--text-dark);
+        }
+
+        .dark-mode .my-proof-item .status-tag.approved {
+            background-color: var(--status-approved);
+        }
+
+        .dark-mode .my-proof-item .status-tag.rejected {
+            background-color: var(--status-rejected);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em; /* Ajuste para mobile */
+            }
+
+            .header-icons {
+                gap: 12px;
+            }
+
+            .header-icons .icon-btn {
+                font-size: 1.5em; /* Ajuste para mobile */
+            }
+
+            .container {
+                margin: 10px auto;
+                padding: 18px;
+                width: 98%;
+                border-radius: 10px;
+            }
+
+            .secretary-tabs button {
+                max-width: unset;
+                width: 100%;
+                padding: 10px 15px;
+                font-size: 0.95em;
+            }
+
+            #foundItemsList,
+            #pendingProofsContainer,
+            #registeredItemsContainer,
+            #myProofsContainer {
+                grid-template-columns: 1fr;
+            }
+
+            .item-card img,
+            .proof-card img,
+            .my-proof-item img {
+                height: 140px;
+            }
+
+            #secretaryLogin form,
+            #addNewItemForm form {
+                padding: 20px;
+                margin: 25px auto;
+                border-radius: 10px;
+            }
+
+            h2 {
+                font-size: 1.6em; /* Ajuste para mobile */
+                margin-bottom: 20px;
+            }
+
+            h3 {
+                font-size: 1.3em; /* Ajuste para mobile */
+                margin-bottom: 20px;
+            }
+
+            button {
+                padding: 10px 18px;
+                font-size: 1em;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            input[type="email"],
+            textarea,
+            select {
+                padding: 10px;
+                margin-bottom: 12px;
+                border-radius: 6px;
+            }
+
+            label {
+                margin-bottom: 6px;
+                font-size: 0.95em;
+            }
+
+            .notification-item,
+            .my-proof-item {
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+
+            #globalMessage {
+                padding: 25px;
+                border-radius: 12px;
+            }
+
+            #globalMessage p {
+                font-size: 1.1em;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html">Achados e Perdidos</a></h1> <div class="header-icons">
+            <button class="icon-btn" id="darkModeToggle" title="Modo Noturno">🌙</button>
+            <button class="icon-btn" id="notificationBtn" title="Notificações">🔔<span class="notification-count"
+                    id="notificationCount">0</span></button>
+            <button class="icon-btn" id="profileBtn" title="Acesso Secretaria">⚙️</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="studentHome" class="screen active">
+            <h2 style="text-align: center;">Itens Encontrados na Escola</h2> <input type="text" id="searchItem" placeholder="Pesquisar por nome ou descrição do item..."> <div class="filter-buttons">
+                <button class="secondary filter-btn active" data-category="todos">Todos</button> <button class="secondary filter-btn" data-category="material escolar">Material Escolar</button> <button class="secondary filter-btn" data-category="eletronicos">Eletrônicos</button> <button class="secondary filter-btn" data-category="roupas">Roupas</button> <button class="secondary filter-btn" data-category="documentos">Documentos</button> <button class="secondary filter-btn" data-category="outros">Outros</button> </div>
+
+            <div id="foundItemsList"
+                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
+            </div>
+            <p id="noFoundItemsMessage" style="text-align: center; color: #777; margin-top: 20px; display: none;">Nenhum
+                item encontrado no momento.</p>
+
+            <button class="secondary" id="viewMyProofsBtn">Minhas
+                Solicitações de Posse</button>
+        </section>
+
+        <section id="proofOfOwnership" class="screen">
+            <h2 style="text-align: center;">Comprovar Posse do Item</h2> <p style="text-align: center; color: var(--text-light); margin-bottom: 20px;">Preencha as informações
+                abaixo para confirmar posse.</p> <form id="proofForm">
+                <input type="hidden" id="proofItemId">
+                <label for="studentName">Seu nome completo <span style="color: var(--red-danger);">*</span></label> <input type="text" id="studentName" required>
+
+                <label for="studentClass">Sua turma <span style="color: var(--red-danger);">*</span></label> <input type="text" id="studentClass" required>
+
+                <label for="lostLocation">Onde você acha que perdeu <span
+                        style="color: var(--red-danger);">*</span></label> <input type="text" id="lostLocation" placeholder="Ex: pátio, sala de informática..." required> <label for="itemCharacteristic">Descreva um detalhe específico do item que NÃO está visível na
+                    foto:</label> <textarea id="itemCharacteristic" placeholder="Ex: arranhão, sigla, etc."></textarea> <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px;">
+                    <button type="submit" class="primary">Comprovar Posse</button> <button type="button" class="secondary" id="backToHomeProofBtn">Voltar ao Início</button> </div>
+            </form>
+        </section>
+
+        <section id="notificationScreen" class="screen">
+            <h2 style="text-align: center;">Suas Notificações</h2>
+            <p id="noNotificationsMessage"
+                style="text-align: center; color: var(--text-light); margin-top: 20px; display: none;">Nenhuma
+                notificação no momento.</p>
+            <div id="notificationMessages"
+                style="background-color: var(--medium-bg); padding: 25px; border-radius: 12px; margin-top: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
+            </div>
+            <button class="secondary" id="backToHomeNotificationsBtn">Voltar ao Início</button>
+        </section>
+
+        <section id="myProofsScreen" class="screen">
+            <h2 style="text-align: center;">Minhas Solicitações de Posse</h2>
+            <p id="noMyProofsMessage"
+                style="text-align: center; color: var(--text-light); grid-column: 1 / -1; margin-top: 20px; display: none;">
+                Nenhuma solicitação de posse enviada ainda.</p>
+            <div id="myProofsContainer"
+                style="background-color: var(--medium-bg); padding: 25px; border-radius: 12px; margin-top: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+            </div>
+            <button class="secondary" id="backToHomeMyProofsBtn">Voltar ao Início</button>
+        </section>
+
+
+        <section id="secretaryLogin" class="screen">
+            <h2 style="text-align: center;">Acesso da Secretaria</h2> <form id="loginForm">
+                <label for="secretaryEmail">E-mail:</label> <input type="email" id="secretaryEmail" required>
+
+                <label for="secretaryPassword">Senha:</label> <input type="password" id="secretaryPassword" required>
+
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px;">
+                    <button type="submit" class="primary">Login</button> <button type="button" class="secondary" id="backToHomeLoginBtn">Voltar ao Início</button> </div>
+            </form>
+        </section>
+
+        <section id="secretaryDashboard" class="screen">
+            <h2 style="text-align: center;">Acesso da Secretaria</h2> <div class="secretary-tabs">
+                <button class="primary" id="viewProofsBtn">Ver Comprovações</button> <button class="primary" id="viewItemsBtn">Ver Itens Cadastrados</button> <button class="primary" id="addNewItemBtn">Cadastrar Novo Item</button> </div>
+
+            <div id="proofsList"
+                style="background-color: var(--medium-bg); padding: 25px; border-radius: 12px; margin-top: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
+                <h3 style="text-align: center;">Comprovações de Posse Pendentes</h3>
+                <div id="pendingProofsContainer"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px;">
+                </div>
+                <p id="noProofsMessage" style="text-align: center; color: var(--text-light); display: none;">Nenhuma
+                    comprovação pendente no momento.</p>
+            </div>
+
+            <div id="secretaryItemsList"
+                style="background-color: var(--medium-bg); padding: 25px; border-radius: 12px; margin-top: 25px; display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
+                <h3 style="text-align: center;">Itens Cadastrados</h3>
+                <div id="registeredItemsContainer"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px;">
+                </div>
+                <p id="noRegisteredItemsMessage" style="text-align: center; color: var(--text-light); display: none;">
+                    Nenhum item cadastrado ainda.</p>
+            </div>
+
+            <div id="addNewItemForm"
+                style="background-color: var(--medium-bg); padding: 25px; border-radius: 12px; margin-top: 25px; display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
+                <h3 style="text-align: center;">Cadastrar Novo Item</h3>
+                <form id="itemRegistrationForm">
+                    <input type="hidden" id="editItemId">
+
+                    <label for="itemName">Nome do item: <span style="color: var(--red-danger);">*</span></label> <input type="text" id="itemName" required>
+
+                    <label for="itemDescription">Descrição do item: <span
+                            style="color: var(--red-danger);">*</span></label> <textarea id="itemDescription" required></textarea>
+
+                    <label for="itemLocation">Local onde foi encontrado: <span
+                            style="color: var(--red-danger);">*</span></label> <input type="text" id="itemLocation" required>
+
+                    <label style="margin-top: 15px;">Selecione uma ou mais categorias do item: <span
+                            style="color: var(--red-danger);">*</span></label> <div class="category-checkboxes">
+                        <label><input type="checkbox" name="itemCategory" value="material escolar"> Material
+                            Escolar</label> <label><input type="checkbox" name="itemCategory" value="eletronicos"> Eletrônicos</label> <label><input type="checkbox" name="itemCategory" value="roupas"> Roupas</label>
+                        <label><input type="checkbox" name="itemCategory" value="documentos"> Documentos</label>
+                        <label><input type="checkbox" name="itemCategory" value="outros"> Outros</label>
+                    </div>
+
+                    <label for="itemPhoto">Foto do item (opcional):</label> <input type="file" id="itemPhoto" accept="image/*" style="margin-bottom: 20px;">
+                    <img id="itemPhotoPreview" src="#" alt="Pré-visualização da foto"
+                        style="max-width: 180px; max-height: 180px; display: none; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.08);">
+
+                    <button type="submit" class="primary" id="addItemSubmitBtn">Adicionar Item</button> </form>
+            </div>
+        </section>
+
+        <div id="globalMessage" style="display: none;">
+            <p id="globalMessageText"></p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button class="secondary" id="globalMessageUndoBtn" style="display: none;">Desfazer</button>
+                <button class="primary" id="globalMessageContinueBtn">Continuar</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Desenvolvido com ❤️ por Projeto Aura</p>
+        <p>© 2025 ETEC Darcy - Todos os direitos reservados.</p>
+    </footer>
+
+    <script type="module" src="./firebaseconfig.js"></script>
+
+  <script type="module">
+        // Importa as instâncias de 'app' e 'db' do firebaseconfig.js
+        // REMOVIDO: Como o Cloud Storage NÃO está sendo usado, 'storage' não é importado.
+        import { app, db } from './firebaseconfig.js'; 
+
+        // Importa as funções específicas do Firestore SDK.
+        // Elas AINDA SÃO NECESSÁRIAS AQUI porque são usadas diretamente neste arquivo.
+        import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+        // REMOVIDO: As importações do Storage SDK (ref, uploadBytes, getDownloadURL, deleteObject) foram removidas daqui.
+
+        // Variáveis globais para armazenar os dados localmente após serem carregados do Firebase
+        let itemsFound = [];
+        let proofsOfOwnership = [];
+        let notifications = [];
+
+        // --- Funções Auxiliares para Interação com Firebase Firestore ---
+        async function loadCollection(collectionName) {
+            try {
+                const colRef = collection(db, collectionName);
+                const snapshot = await getDocs(colRef);
+                return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            } catch (error) {
+                console.error(`Erro ao carregar a coleção '${collectionName}' do Firestore:`, error);
+                return []; // Retorna um array vazio em caso de erro
+            }
+        }
+
+        async function addDocument(collectionName, data) {
+            try {
+                const colRef = collection(db, collectionName);
+                const docRef = await addDoc(colRef, data);
+                return { id: docRef.id, ...data };
+            } catch (error) {
+                console.error(`Erro ao adicionar documento na coleção '${collectionName}':`, error);
+                throw error;
+            }
+        }
+
+        async function updateDocument(collectionName, id, data) {
+            try {
+                const docRef = doc(db, collectionName, id);
+                await updateDoc(docRef, data);
+                return { id, ...data }; // Retorna o objeto com o ID para manter a consistência
+            } catch (error) {
+                console.error(`Erro ao atualizar documento '${id}' na coleção '${collectionName}':`, error);
+                throw error;
+            }
+        }
+
+        async function deleteDocument(collectionName, id) {
+            try {
+                const docRef = doc(db, collectionName, id);
+                await deleteDoc(docRef);
+            } catch (error) {
+                console.error(`Erro ao excluir documento '${id}' da coleção '${collectionName}':`, error);
+                throw error;
+            }
+        }
+
+        // --- Funções de Imagem (AGORA SALVANDO COMO BASE64 NO FIRESTORE) ---
+        async function uploadImage(file) {
+            return new Promise((resolve, reject) => {
+                if (!file) {
+                    resolve(''); // Retorna string vazia se nenhum arquivo for fornecido
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const base64String = reader.result;
+                    // Limite de 1MB para documentos do Firestore, base64 é maior que o binário.
+                    // Para fins de demonstração, não há validação de tamanho aqui.
+                    console.log("Imagem convertida para Base64. Tamanho aproximado (chars):", base64String.length);
+                    resolve(base64String);
+                };
+                reader.onerror = (error) => {
+                    console.error("Erro ao ler o arquivo para Base64:", error);
+                    reject(''); // Rejeita ou resolve com vazio em caso de erro
+                };
+                reader.readAsDataURL(file); // Lê o arquivo como URL de dados (Base64)
+            });
+        }
+
+        // Não há necessidade de "deletar" Base64 do Storage, apenas da entrada do Firestore.
+        // Mas a função é mantida para consistência na chamada.
+        async function deleteImage(photoUrl) {
+            console.warn("Nenhuma imagem real para excluir (está embutida em Base64).");
+            return; // Não faz nada
+        }
+
+        // --- Inicialização do Aplicativo: Carrega todos os dados do Firebase ---
+        async function initializeAppData() {
+            try {
+                itemsFound = await loadCollection('itemsFound');
+                proofsOfOwnership = await loadCollection('proofsOfOwnership');
+                notifications = await loadCollection('notifications');
+
+                // Populando dados dummy APENAS SE AS COLEÇÕES ESTIVEREM VAZIAS
+                // REMOVA OU COMENTE ESTA CHAMADA APÓS A PRIMEIRA EXECUÇÃO
+                // E SEUS DADOS DUMMY APARECEREM NO FIREBASE.
+                // await populateDummyDataIfEmpty(); // <--- DESCOMENTE SE QUISER OS DUMMY NOVAMENTE
+                
+                renderFoundItems(); // Renderiza os itens na tela inicial do aluno
+                updateNotificationCount(); // Atualiza o contador de notificações
+            } catch (error) {
+                console.error("Falha ao carregar dados iniciais do Firebase:", error);
+                showGlobalMessage('Erro ao carregar dados do sistema. Tente recarregar a página.', false, null, () => location.reload());
+            }
+        }
+
+        async function populateDummyDataIfEmpty() {
+            // Verifica se as coleções estão vazias consultando diretamente o Firebase
+            let currentItems = await loadCollection('itemsFound');
+            let currentNotifications = await loadCollection('notifications');
+            let currentProofs = await loadCollection('proofsOfOwnership');
+
+            let shouldAddItems = currentItems.length === 0;
+            let shouldAddNotifications = currentNotifications.length === 0;
+            let shouldAddProofs = currentProofs.length === 0;
+
+            if (shouldAddItems) {
+                const dummyItems = [
+                    {
+                        name: 'Celular Samsung',
+                        description: 'Celular preto, tela trincada no canto superior. Modelo antigo.',
+                        location: 'Pátio Principal',
+                        categories: ['eletronicos'],
+                        // Imagens dummy agora como Base64 (pequenas ou placeholders)
+                        // Atenção: imagens grandes em Base64 estouram o limite do Firestore
+                        photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8HmHNAAAAA1BMVEX///+ntrA5AAAANElEQVR4nO3BMQEAAADCoPzRbQzhxAAAAAAAADg+F+cAAAH5kQAAAAAAAAAAAAAAAAAAAAAAAADg8p/1AgI+a+YnAAAAAElFTkSuQmCC' // Pequena imagem preta
+                    },
+                    {
+                        name: 'Estojo de Lápis',
+                        description: 'Estojo azul com zíper amarelo, contém 3 lápis e uma borracha.',
+                        location: 'Sala 5',
+                        categories: ['material escolar'],
+                        photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8HmHNAAAAA1BMVEX///+ntrA5AAAANElEQVR4nO3BMQEAAADCoPzRbQzhxAAAAAAAADg+F+cAAAH5kQAAAAAAAAAAAAAAAAAAAAAAAADg8p/1AgI+a+YnAAAAAElFTkSuQmCC' // Pequena imagem preta
+                    },
+                    {
+                        name: 'Jaqueta Jeans',
+                        description: 'Jaqueta jeans tamanho M, com um pequeno rasgo no ombro esquerdo.',
+                        location: 'Quadra de Esportes',
+                        categories: ['roupas'],
+                        photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8HmHNAAAAA1BMVEX///+ntrA5AAAANElEQVR4nO3BMQEAAADCoPzRbQzhxAAAAAAAADg+F+cAAAH5kQAAAAAAAAAAAAAAAAAAAAAAAADg8p/1AgI+a+YnAAAAAElFTkSuQmCC' // Pequena imagem preta
+                    },
+                    {
+                        name: 'Carteira de Identidade',
+                        description: 'RG em nome de Maria Silva, contém um chip colado na parte de trás.',
+                        location: 'Biblioteca',
+                        categories: ['documentos'],
+                        photo: '' // Exemplo sem foto
+                    },
+                    {
+                        name: 'Chaveiro de Coruja',
+                        description: 'Chaveiro de metal em formato de coruja, com duas chaves pequenas.',
+                        location: 'Corredor Principal',
+                        categories: ['outros'],
+                        photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8HmHNAAAAA1BMVEX///+ntrA5AAAANElEQVR4nO3BMQEAAADCoPzRbQzhxAAAAAAAADg+F+cAAAH5kQAAAAAAAAAAAAAAAAAAAAAAAADg8p/1AgI+a+YnAAAAAElFTkSuQmCC' // Pequena imagem preta
+                    }
+                ];
+                for (const item of dummyItems) {
+                    await addDocument('itemsFound', item);
+                }
+                itemsFound = await loadCollection('itemsFound'); 
+            }
+
+            if (shouldAddNotifications) {
+                await addNotification({
+                    to: 'secretaria',
+                    title: 'Bem-vindo!',
+                    message: 'Bem-vindo ao sistema de Achados e Perdidos. Fique atento às notificações!',
+                    type: 'system',
+                    read: false,
+                    timestamp: new Date().toISOString()
+                });
+                await addNotification({
+                    to: 'aluno',
+                    title: 'Item Encontrado!',
+                    message: 'Um livro de matemática foi encontrado na biblioteca. Verifique se é seu!',
+                    type: 'found_item_alert',
+                    read: false,
+                    timestamp: new Date(Date.now() - 3600 * 1000).toISOString()
+                });
+                notifications = await loadCollection('notifications'); 
+            }
+
+            if (shouldAddProofs && itemsFound.length > 0) {
+                const item1 = itemsFound.find(i => i.name === 'Celular Samsung');
+                const item2 = itemsFound.find(i => i.name === 'Estojo de Lápis');
+                const item3 = itemsFound.find(i => i.name === 'Jaqueta Jeans');
+
+                const dummyProofs = [];
+                if (item1) {
+                    dummyProofs.push({
+                        itemId: item1.id,
+                        itemName: item1.name,
+                        studentName: 'João Silva',
+                        studentClass: '3º INFO B',
+                        lostLocation: 'Pátio',
+                        itemCharacteristic: 'Trincado no canto superior direito',
+                        status: 'pendente',
+                        timestamp: new Date().toISOString()
+                    });
+                }
+                if (item2) {
+                    dummyProofs.push({
+                        itemId: item2.id,
+                        itemName: item2.name,
+                        studentName: 'Maria Santos',
+                        studentClass: '1º ADM A',
+                        lostLocation: 'Sala 5',
+                        itemCharacteristic: 'Contém um adesivo de estrela dourada por dentro',
+                        status: 'aprovado',
+                        timestamp: new Date(Date.now() - 86400 * 1000).toISOString()
+                    });
+                }
+                if (item3) {
+                    dummyProofs.push({
+                        itemId: item3.id,
+                        itemName: item3.name,
+                        studentName: 'Pedro Souza',
+                        studentClass: '2º MEC C',
+                        lostLocation: 'Quadra',
+                        itemCharacteristic: 'Etiqueta com "P.S." bordado',
+                        status: 'rejeitado',
+                        timestamp: new Date(Date.now() - 2 * 86400 * 1000).toISOString()
+                    });
+                }
+
+                for (const proof of dummyProofs) {
+                    await addDocument('proofsOfOwnership', proof);
+                }
+                proofsOfOwnership = await loadCollection('proofsOfOwnership'); 
+            }
+        }
+
+        // --- Funções de Navegação e UI ---
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+            if (screenId === 'notificationScreen') {
+                renderNotificationScreenContent();
+            } else if (screenId === 'myProofsScreen') {
+                renderMyProofs();
+            }
+            if (screenId === 'studentHome') {
+                renderFoundItems();
+            }
+            window.scrollTo(0, 0);
+        }
+
+        // --- Sistema de Notificações ---
+        async function addNotification(notification) {
+            try {
+                const newNotification = await addDocument('notifications', notification);
+                notifications.push(newNotification);
+                updateNotificationCount();
+            } catch (error) {
+                console.error("Falha ao adicionar notificação:", error);
+            }
+        }
+
+        function updateNotificationCount() {
+            const unreadNotifications = notifications.filter(n => !n.read && n.to !== 'secretaria');
+            const countElement = document.getElementById('notificationCount');
+            if (unreadNotifications.length > 0) {
+                countElement.textContent = unreadNotifications.length;
+                countElement.style.display = 'block';
+                countElement.classList.add('pulseNotification'); 
+            } else {
+                countElement.style.display = 'none';
+                countElement.classList.remove('pulseNotification');
+            }
+        }
+
+        function renderNotificationScreenContent() {
+            const notificationMessages = document.getElementById('notificationMessages');
+            const noNotificationsMessageElement = document.getElementById('noNotificationsMessage');
+
+            notificationMessages.innerHTML = '';
+
+            const studentNotifications = notifications.filter(n => n.to !== 'secretaria').slice().reverse();
+
+            if (studentNotifications.length === 0) {
+                noNotificationsMessageElement.style.display = 'block';
+            } else {
+                noNotificationsMessageElement.style.display = 'none';
+                studentNotifications.forEach(async n => {
+                    const notificationDiv = document.createElement('div');
+                    notificationDiv.classList.add('notification-item');
+                    notificationDiv.classList.add('animated'); 
+                    if (!n.read) {
+                        notificationDiv.classList.add('unread');
+                        try {
+                            await updateDocument('notifications', n.id, { read: true });
+                            n.read = true; 
+                        } catch (error) {
+                            console.error(`Erro ao marcar notificação ${n.id} como lida:`, error);
+                        }
+                    }
+                    notificationDiv.dataset.id = n.id;
+                    notificationDiv.innerHTML = `
+                        <p><strong>${n.title}</strong></p>
+                        <p>${n.message}</p>
+                        <small>${new Date(n.timestamp).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</small>
+                        <button class="delete-notification">Apagar</button>
+                    `;
+                    notificationMessages.appendChild(notificationDiv);
+                });
+            }
+            updateNotificationCount();
+        }
+
+        document.getElementById('notificationMessages').addEventListener('click', async (event) => {
+            if (event.target.classList.contains('delete-notification')) {
+                const notificationElement = event.target.closest('.notification-item');
+                const notificationId = notificationElement.dataset.id;
+                if (notificationId) {
+                    try {
+                        await deleteDocument('notifications', notificationId);
+                        notifications = notifications.filter(n => n.id !== notificationId); 
+                        renderNotificationScreenContent();
+                    }
+                    catch (error) {
+                        console.error("Falha ao apagar notificação:", error);
+                        showGlobalMessage('Erro ao apagar notificação. Tente novamente.', false, null, () => {});
+                    }
+                }
+            }
+        });
+
+        // --- Renderização de Minhas Comprovações de Posse (Aluno) ---
+        async function renderMyProofs() {
+            proofsOfOwnership = await loadCollection('proofsOfOwnership');
+            itemsFound = await loadCollection('itemsFound');
+
+            const container = document.getElementById('myProofsContainer');
+            const noMyProofsMessageElement = document.getElementById('noMyProofsMessage');
+
+            container.innerHTML = '';
+            const studentProofs = proofsOfOwnership.slice().sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); 
+
+            if (studentProofs.length === 0) {
+                noMyProofsMessageElement.style.display = 'block';
+            } else {
+                noMyProofsMessageElement.style.display = 'none';
+                studentProofs.forEach((proof, index) => {
+                    const itemAssociated = itemsFound.find(item => item.id === proof.itemId);
+                    const proofItem = document.createElement('div');
+                    proofItem.classList.add('my-proof-item');
+                    proofItem.classList.add('animated'); 
+                    proofItem.style.animationDelay = `${index * 0.05}s`; 
+
+                    let statusClass = '';
+                    let statusText = '';
+                    switch (proof.status) {
+                        case 'pendente':
+                            statusClass = 'pending';
+                            statusText = 'Pendente';
+                            break;
+                        case 'aprovado':
+                            statusClass = 'approved';
+                            statusText = 'Aprovado';
+                            break;
+                        case 'rejeitado':
+                            statusClass = 'rejected';
+                            statusText = 'Rejeitado';
+                            break;
+                        default:
+                            statusClass = '';
+                            statusText = 'Desconhecido';
+                            break;
+                    }
+
+                    proofItem.innerHTML = `
+                        ${itemAssociated && itemAssociated.photo
+                            ? `<img src="${itemAssociated.photo}" alt="${itemAssociated.name}">`
+                            : `<div style="width: 100%; height: 160px; background-color: #ccc; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: #666; margin-bottom: 15px; font-size: 0.9em;">Item sem Imagem ou item original não encontrado</div>`
+                        }
+                        <p style="font-weight: 600; margin-bottom: 5px;">Item: ${proof.itemName || 'Item Desconhecido'}</p>
+                        <p style="font-size: 0.9em; color: var(--text-light); margin-bottom: 5px;"><strong>Turma:</strong> ${proof.studentClass || 'N/A'}</p>
+                        <p style="font-size: 0.9em; color: var(--text-light); margin-bottom: 5px;"><strong>Local Perdido:</strong> ${proof.lostLocation || 'N/A'}</p>
+                        <p style="margin-top: 10px;"><strong>Status:</strong> <span class="status-tag ${statusClass}">${statusText}</span></p>
+                        <small style="font-size: 0.8em; color: var(--text-light); margin-top: auto; padding-top: 10px;">Enviado em: ${new Date(proof.timestamp).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</small>
+                    `;
+                    container.appendChild(proofItem);
+                });
+            }
+        }
+
+        // --- Mensagem Global de Feedback (com Desfazer/Continuar) ---
+        function showGlobalMessage(message, showUndo = false, undoCallback = null, continueCallback = null) {
+            const globalMessage = document.getElementById('globalMessage');
+            document.getElementById('globalMessageText').textContent = message;
+            const undoBtn = document.getElementById('globalMessageUndoBtn');
+            const continueBtn = document.getElementById('globalMessageContinueBtn');
+
+            if (showUndo && undoCallback) {
+                undoBtn.style.display = 'inline-block';
+                undoBtn.onclick = null; 
+                undoBtn.addEventListener('click', function handler() {
+                    undoCallback();
+                    globalMessage.style.display = 'none';
+                    undoBtn.removeEventListener('click', handler);
+                }, { once: true });
+            } else {
+                undoBtn.style.display = 'none';
+            }
+
+            continueBtn.onclick = null; 
+            continueBtn.addEventListener('click', function handler() {
+                if (continueCallback) continueCallback();
+                globalMessage.style.display = 'none';
+                continueBtn.removeEventListener('click', handler);
+            }, { once: true });
+
+            globalMessage.style.display = 'flex';
+        }
+
+        // --- Event Listeners Globais ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAppData(); 
+
+            // Botões do Header
+            document.getElementById('notificationBtn').addEventListener('click', () => {
+                showScreen('notificationScreen');
+            });
+            document.getElementById('profileBtn').addEventListener('click', () => {
+                showScreen('secretaryLogin');
+            });
+
+            // Botão "Minhas Solicitações de Posse" na tela do aluno
+            document.getElementById('viewMyProofsBtn').addEventListener('click', () => {
+                showScreen('myProofsScreen');
+            });
+
+            // Botões "Voltar para o Início" (usando IDs específicos)
+            document.getElementById('backToHomeProofBtn').addEventListener('click', () => showScreen('studentHome'));
+            document.getElementById('backToHomeNotificationsBtn').addEventListener('click', () => showScreen('studentHome'));
+            document.getElementById('backToHomeMyProofsBtn').addEventListener('click', () => showScreen('studentHome'));
+            document.getElementById('backToHomeLoginBtn').addEventListener('click', () => showScreen('studentHome'));
+
+
+            // Modo noturno
+            document.getElementById('darkModeToggle').addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+
+            // Carregar preferência de dark mode ao iniciar
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+
+        // --- Funções da Tela Inicial do Aluno ---
+        function renderFoundItems(filter = 'todos', searchTerm = '') {
+            const container = document.getElementById('foundItemsList');
+            container.innerHTML = '';
+            let filteredItems = itemsFound; 
+
+            if (filter !== 'todos') {
+                filteredItems = filteredItems.filter(item => item.categories.includes(filter));
+            }
+
+            if (searchTerm) {
+                const lowerCaseSearch = searchTerm.toLowerCase();
+                filteredItems = filteredItems.filter(item =>
+                    item.name.toLowerCase().includes(lowerCaseSearch) ||
+                    item.description.toLowerCase().includes(lowerCaseSearch) ||
+                    item.location.toLowerCase().includes(lowerCaseSearch) ||
+                    item.categories.some(cat => cat.toLowerCase().includes(lowerCaseSearch))
+                );
+            }
+
+            if (filteredItems.length === 0) {
+                document.getElementById('noFoundItemsMessage').style.display = 'block';
+            } else {
+                document.getElementById('noFoundItemsMessage').style.display = 'none';
+            }
+
+            filteredItems.forEach((item, index) => { // Adicionado index para stagger animation
+                const itemCard = document.createElement('div');
+                itemCard.classList.add('item-card');
+                itemCard.classList.add('animated'); 
+                itemCard.style.animationDelay = `${index * 0.05}s`; 
+
+                itemCard.innerHTML = `
+                    ${item.photo
+                        ? `<img src="${item.photo}" alt="${item.name}">`
+                        : `<div style="width: 100%; height: 160px; background-color: #ccc; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: #666; margin-bottom: 15px; font-size: 0.9em;">Sem Imagem</div>`
+                    }
+                    <h4 style="font-weight: 600;">${item.name}</h4>
+                    <p style="font-size: 0.9em; color: var(--text-medium);">${item.description}</p>
+                    <p style="font-size: 0.8em; color: var(--text-light);">Local: ${item.location}</p>
+                    <p style="font-size: 0.8em; color: var(--text-light);">Categoria: ${item.categories.join(', ')}</p>
+                    <button class="primary claim-item-btn" data-item-id="${item.id}">Perdi este item!</button>
+                `;
+                container.appendChild(itemCard);
+            });
+
+            document.querySelectorAll('.claim-item-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const itemId = event.target.dataset.itemId;
+                    document.getElementById('proofItemId').value = itemId;
+                    document.getElementById('proofForm').reset();
+                    showScreen('proofOfOwnership');
+                });
+            });
+        }
+
+        // Filtro de itens na tela do aluno
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', (event) => {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+                renderFoundItems(event.target.dataset.category, document.getElementById('searchItem').value);
+            });
+        });
+
+        // Busca de itens na tela do aluno
+        document.getElementById('searchItem').addEventListener('input', (event) => {
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.category;
+            renderFoundItems(activeFilter, event.target.value);
+        });
+
+        // --- Formulário de Comprovação de Posse ---
+        document.getElementById('proofForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const itemId = document.getElementById('proofItemId').value;
+            const item = itemsFound.find(i => i.id === itemId);
+
+            if (!item) {
+                alert('Erro: Item não encontrado para comprovação.');
+                return;
+            }
+
+            const proof = {
+                itemId: itemId,
+                itemName: item.name,
+                studentName: document.getElementById('studentName').value,
+                studentClass: document.getElementById('studentClass').value,
+                lostLocation: document.getElementById('lostLocation').value,
+                itemCharacteristic: document.getElementById('itemCharacteristic').value,
+                status: 'pendente', 
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                const newProof = await addDocument('proofsOfOwnership', proof);
+                proofsOfOwnership.push(newProof); 
+
+                await addNotification({
+                    to: 'secretaria',
+                    title: 'Nova Comprovação de Posse',
+                    message: `O aluno(a) ${proof.studentName} da turma ${proof.studentClass} enviou uma comprovação para o item: "${item.name}".`,
+                    type: 'new_proof',
+                });
+
+                showGlobalMessage('Enviamos uma notificação para a secretaria. Aguarde a sua resposta.', false, null, () => {
+                    showScreen('studentHome');
+                    document.getElementById('proofForm').reset();
+                });
+            } catch (error) {
+                console.error("Falha ao enviar comprovação:", error);
+                showGlobalMessage('Erro ao enviar comprovação. Tente novamente.', false, null, () => {});
+            }
+        });
+
+        // --- Login da Secretaria ---
+        const SECRETARY_EMAIL = 'secretaria@etec.com'; 
+        const SECRETARY_PASSWORD = 'senha123';
+
+        document.getElementById('loginForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = document.getElementById('secretaryEmail').value;
+            const password = document.getElementById('secretaryPassword').value;
+
+            if (email === SECRETARY_EMAIL && password === SECRETARY_PASSWORD) {
+                alert('Login bem-sucedido!');
+                showScreen('secretaryDashboard');
+                showSecretarySubTab('proofsList'); 
+            } else {
+                alert('Email ou senha incorretos.');
+            }
+        });
+
+        // --- Funções da Área da Secretaria ---
+        function showSecretarySubTab(tabId) {
+            document.getElementById('proofsList').style.display = 'none';
+            document.getElementById('secretaryItemsList').style.display = 'none';
+            document.getElementById('addNewItemForm').style.display = 'none';
+
+            document.getElementById(tabId).style.display = 'block';
+
+            if (tabId === 'proofsList') {
+                renderProofsOfOwnership();
+            } else if (tabId === 'secretaryItemsList') {
+                renderSecretaryItems();
+            } else if (tabId === 'addNewItemForm') {
+                document.getElementById('itemRegistrationForm').reset();
+                document.getElementById('itemPhoto').value = '';
+                document.getElementById('itemPhotoPreview').src = '#';
+                document.getElementById('itemPhotoPreview').style.display = 'none';
+                document.getElementById('addItemSubmitBtn').textContent = 'Adicionar Item';
+                document.getElementById('editItemId').value = '';
+                document.querySelectorAll('input[name="itemCategory"]').forEach(cb => cb.checked = false);
+            }
+        }
+
+        document.getElementById('viewProofsBtn').addEventListener('click', () => showSecretarySubTab('proofsList'));
+        document.getElementById('viewItemsBtn').addEventListener('click', () => showSecretarySubTab('secretaryItemsList'));
+        document.getElementById('addNewItemBtn').addEventListener('click', () => showSecretarySubTab('addNewItemForm'));
+
+        // --- Renderização de Comprovações de Posse (Secretaria) ---
+        async function renderProofsOfOwnership() {
+            proofsOfOwnership = await loadCollection('proofsOfOwnership');
+            itemsFound = await loadCollection('itemsFound');
+
+            const container = document.getElementById('pendingProofsContainer');
+            container.innerHTML = '';
+            const pendingProofs = proofsOfOwnership.filter(proof => proof.status === 'pendente').sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); 
+
+            if (pendingProofs.length === 0) {
+                document.getElementById('noProofsMessage').style.display = 'block';
+            } else {
+                document.getElementById('noProofsMessage').style.display = 'none';
+            }
+
+            pendingProofs.forEach((proof, index) => {
+                const itemAssociated = itemsFound.find(item => item.id === proof.itemId);
+                const proofCard = document.createElement('div');
+                proofCard.classList.add('proof-card');
+                proofCard.classList.add('animated'); 
+                proofCard.style.animationDelay = `${index * 0.05}s`; 
+
+                let statusClass = '';
+                let statusText = '';
+                switch (proof.status) {
+                    case 'pendente':
+                        statusClass = 'pending';
+                        statusText = 'Pendente';
+                        break;
+                    case 'aprovado':
+                        statusClass = 'approved';
+                        statusText = 'Aprovado';
+                        break;
+                    case 'rejeitado':
+                        statusClass = 'rejected';
+                        statusText = 'Rejeitado';
+                        break;
+                    default:
+                        statusClass = '';
+                        statusText = 'Desconhecido';
+                        break;
+                }
+
+                proofCard.innerHTML = `
+                    ${itemAssociated && itemAssociated.photo
+                        ? `<img src="${itemAssociated.photo}" alt="${itemAssociated.name}">`
+                        : `<div style="width: 100%; height: 160px; background-color: #ccc; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: #666; margin-bottom: 15px; font-size: 0.9em;">Item sem Imagem ou item original não encontrado</div>`
+                    }
+                    <p style="font-weight: 600; margin-bottom: 5px;">Item: ${proof.itemName || 'Item Desconhecido'}</p>
+                    <p style="font-size: 0.9em; color: var(--text-light); margin-bottom: 5px;"><strong>Aluno:</strong> ${proof.studentName || 'N/A'}</p>
+                    <p style="font-size: 0.9em; color: var(--text-light); margin-bottom: 5px;"><strong>Local Perdido:</strong> ${proof.lostLocation || 'N/A'}</p>
+                    <p style="margin-top: 10px;"><strong>Característica:</strong> ${proof.itemCharacteristic || 'N/A'}</p>
+                    <div class="button-group" style="margin-top: 15px;">
+                        <button class="primary approve-proof-btn" data-proof-id="${proof.id}">Aprovar</button>
+                        <button class="danger reject-proof-btn" data-proof-id="${proof.id}">Rejeitar</button>
+                    </div>
+                `;
+                container.appendChild(proofCard);
+            });
+
+            document.querySelectorAll('.approve-proof-btn').forEach(btn => {
+                btn.addEventListener('click', (event) => handleProofAction(event.target.dataset.proofId, 'aprovado'));
+            });
+            document.querySelectorAll('.reject-proof-btn').forEach(btn => {
+                btn.addEventListener('click', (event) => handleProofAction(event.target.dataset.proofId, 'rejeitado'));
+            });
+        }
+
+        async function handleProofAction(proofId, status) {
+            const proofIndex = proofsOfOwnership.findIndex(p => p.id === proofId);
+            if (proofIndex > -1) {
+                const proof = proofsOfOwnership[proofIndex];
+                try {
+                    await updateDocument('proofsOfOwnership', proofId, { status: status });
+                    proofsOfOwnership[proofIndex].status = status; 
+
+                    // Se a comprovação for aprovada, exclua o item da lista de itens encontrados
+                    if (status === 'aprovado') {
+                        const itemToDeleteId = proof.itemId;
+                        if (itemToDeleteId) {
+                            await deleteDocument('itemsFound', itemToDeleteId);
+                            itemsFound = itemsFound.filter(item => item.id !== itemToDeleteId); // Atualiza a lista localmente
+                        }
+                    }
+
+                    await addNotification({
+                        to: 'aluno',
+                        title: `Sua Comprovação do item "${proof.itemName}" foi ${status === 'aprovado' ? 'Aprovada' : 'Rejeitada'}`,
+                        message: `A secretaria revisou sua solicitação para o item "${proof.itemName}". Status: ${status.toUpperCase()}.`,
+                        type: 'proof_response',
+                    });
+
+                    showGlobalMessage(`Comprovação ${status} com sucesso!`, false, null, () => {
+                        renderProofsOfOwnership();
+                        renderMyProofs();
+                        renderFoundItems(); // Re-renderiza os itens encontrados para refletir a remoção
+                    });
+                } catch (error) {
+                    console.error(`Falha ao ${status} comprovação:`, error);
+                    showGlobalMessage(`Erro ao ${status} comprovação. Tente novamente.`, false, null, () => {});
+                }
+            }
+        }
+
+        // --- Renderização de Itens Cadastrados (Secretaria) ---
+        async function renderSecretaryItems() {
+            itemsFound = await loadCollection('itemsFound');
+
+            const container = document.getElementById('registeredItemsContainer');
+            container.innerHTML = '';
+
+            if (itemsFound.length === 0) {
+                document.getElementById('noRegisteredItemsMessage').style.display = 'block';
+            } else {
+                document.getElementById('noRegisteredItemsMessage').style.display = 'none';
+            }
+
+            itemsFound.forEach((item, index) => { 
+                const itemCard = document.createElement('div');
+                itemCard.classList.add('item-card');
+                itemCard.classList.add('animated'); 
+                itemCard.style.animationDelay = `${index * 0.05}s`; 
+
+                itemCard.innerHTML = `
+                    ${item.photo
+                        ? `<img src="${item.photo}" alt="${item.name}">`
+                        : `<div style="width: 100%; height: 160px; background-color: #ccc; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: #666; margin-bottom: 15px; font-size: 0.9em;">Sem Imagem</div>`
+                    }
+                    <h4 style="font-weight: 600;">${item.name}</h4>
+                    <p style="font-size: 0.9em; color: var(--text-medium);">${item.description}</p>
+                    <p style="font-size: 0.8em; color: var(--text-light);">Local: ${item.location}</p>
+                    <p style="font-size: 0.8em; color: var(--text-light);">Categoria: ${item.categories.join(', ')}</p>
+                    <div class="button-group">
+                        <button class="primary edit-item-btn" data-item-id="${item.id}">Editar</button>
+                        <button class="danger delete-item-btn" data-item-id="${item.id}">Excluir</button>
+                    </div>
+                `;
+                container.appendChild(itemCard);
+            });
+
+            document.querySelectorAll('.edit-item-btn').forEach(btn => {
+                btn.addEventListener('click', (event) => editItem(event.target.dataset.itemId));
+            });
+            document.querySelectorAll('.delete-item-btn').forEach(btn => {
+                btn.addEventListener('click', (event) => deleteItem(event.target.dataset.itemId)); 
+            });
+        }
+
+        // --- Cadastro/Edição de Item (Secretaria) ---
+        document.getElementById('itemRegistrationForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const itemId = document.getElementById('editItemId').value;
+            const name = document.getElementById('itemName').value;
+            const description = document.getElementById('itemDescription').value;
+            const location = document.getElementById('itemLocation').value;
+            const categories = Array.from(document.querySelectorAll('input[name="itemCategory"]:checked')).map(cb => cb.value);
+            const photoFile = document.getElementById('itemPhoto').files[0];
+            let currentPhotoURL = document.getElementById('itemPhotoPreview').src; 
+
+            if (categories.length === 0) {
+                alert('Selecione ao menos uma categoria para o item.');
+                return;
+            }
+
+            let photoToSave = ''; 
+
+            if (photoFile) { 
+                // Se um novo arquivo foi selecionado, converte para Base64 e salva.
+                photoToSave = await uploadImage(photoFile); 
+            } else if (itemId) { 
+                // Se está editando e NENHUM novo arquivo foi selecionado, mantém a foto existente se for uma Base64 válida
+                // ou um placeholder externo que já estava lá (não um '#' ou placeholder temporário do FileReader).
+                if (currentPhotoURL && !currentPhotoURL.includes('placeholder.com') && currentPhotoURL.startsWith('data:image/')) {
+                    photoToSave = currentPhotoURL;
+                } else if (currentPhotoURL && currentPhotoURL.includes('placeholder.com')) {
+                     // Se era um placeholder do sistema, mantém o mesmo.
+                     photoToSave = currentPhotoURL;
+                }
+            }
+
+
+            const itemData = {
+                name,
+                description,
+                location,
+                categories,
+                photo: photoToSave // Agora conterá Base64 ou string vazia/placeholder
+            };
+
+            try {
+                if (itemId) { 
+                    const updatedItem = await updateDocument('itemsFound', itemId, itemData);
+                    const index = itemsFound.findIndex(item => item.id === itemId);
+                    if (index > -1) itemsFound[index] = updatedItem; 
+                    showGlobalMessage('Item editado com sucesso!', false, null, () => {
+                        showSecretarySubTab('secretaryItemsList');
+                        renderFoundItems();
+                    });
+                } else { 
+                    const newItem = await addDocument('itemsFound', itemData);
+                    itemsFound.push(newItem);
+                    await addNotification({
+                        to: 'aluno',
+                        title: `Novo item encontrado: ${newItem.name}`,
+                        message: `Um ${newItem.name} foi encontrado e adicionado à lista de achados e perdidos. Verifique se é seu!`,
+                        type: 'new_item_found',
+                    });
+                    showGlobalMessage('Item adicionado com sucesso!', true, async () => {
+                        try {
+                            await deleteDocument('itemsFound', newItem.id);
+                            itemsFound = itemsFound.filter(item => item.id !== newItem.id);
+                            renderFoundItems();
+                            renderSecretaryItems();
+                        } catch (undoError) {
+                            console.error("Falha ao desfazer adição de item:", undoError);
+                            alert("Erro ao desfazer. O item pode precisar ser removido manualmente.");
+                        }
+                    }, () => {
+                        showSecretarySubTab('secretaryItemsList');
+                        renderFoundItems();
+                    });
+                }
+                document.getElementById('itemRegistrationForm').reset();
+                document.getElementById('itemPhoto').value = '';
+                document.getElementById('itemPhotoPreview').src = '#';
+                document.getElementById('itemPhotoPreview').style.display = 'none';
+                document.getElementById('addItemSubmitBtn').textContent = 'Adicionar Item';
+                document.getElementById('editItemId').value = '';
+                document.querySelectorAll('input[name="itemCategory"]').forEach(cb => cb.checked = false);
+            } catch (error) {
+                console.error("Falha ao salvar item:", error);
+                showGlobalMessage('Erro ao salvar item. Tente novamente.', false, null, () => {});
+            }
+        });
+
+        document.getElementById('itemPhoto').addEventListener('change', (event) => {
+            const preview = document.getElementById('itemPhotoPreview');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    preview.src = e.target.result; // preview localmente
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+            }
+        });
+
+        function editItem(id) {
+            const item = itemsFound.find(i => i.id === id);
+            if (item) {
+                showSecretarySubTab('addNewItemForm');
+                document.getElementById('editItemId').value = item.id;
+                document.getElementById('itemName').value = item.name;
+                document.getElementById('itemDescription').value = item.description;
+                document.getElementById('itemLocation').value = item.location;
+
+                document.querySelectorAll('input[name="itemCategory"]').forEach(cb => {
+                    cb.checked = item.categories.includes(cb.value);
+                });
+
+                if (item.photo) {
+                    document.getElementById('itemPhotoPreview').src = item.photo; // Exibe Base64 ou URL placeholder
+                    document.getElementById('itemPhotoPreview').style.display = 'block';
+                } else {
+                    document.getElementById('itemPhotoPreview').src = '#';
+                    document.getElementById('itemPhotoPreview').style.display = 'none';
+                }
+                document.getElementById('itemPhoto').value = '';
+                document.getElementById('addItemSubmitBtn').textContent = 'Salvar Alterações';
+            }
+        }
+
+        async function deleteItem(id) {
+            const itemIndex = itemsFound.findIndex(item => item.id === id);
+            if (itemIndex > -1) {
+                const deletedItem = itemsFound[itemIndex];
+                try {
+                    await deleteDocument('itemsFound', id);
+                    itemsFound.splice(itemIndex, 1); 
+
+                    showGlobalMessage(`Item "${deletedItem.name}" excluído com sucesso!`, true, async () => {
+                        try {
+                            const restoredItem = await addDocument('itemsFound', {
+                                name: deletedItem.name,
+                                description: deletedItem.description,
+                                location: deletedItem.location,
+                                categories: deletedItem.categories,
+                                photo: deletedItem.photo 
+                            });
+                            itemsFound.splice(itemIndex, 0, restoredItem);
+                            renderSecretaryItems();
+                            renderFoundItems();
+                        } catch (undoError) {
+                            console.error("Falha ao desfazer exclusão de item:", undoError);
+                            alert("Erro ao desfazer. O item pode precisar ser adicionado manualmente.");
+                        }
+                    }, () => {
+                        renderSecretaryItems();
+                        renderFoundItems();
+                    });
+                } catch (error) {
+                    console.error("Falha ao excluir item:", error);
+                    showGlobalMessage('Erro ao excluir item. Tente novamente.', false, null, () => {});
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
