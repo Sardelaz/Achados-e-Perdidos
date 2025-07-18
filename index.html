@@ -28,7 +28,8 @@
             /* Botão primário: um azul que se destaca mas é agradável */
             --button-secondary-bg: #aebacd;
             /* Botão secundário: cinza azulado suave */
-            --accent-color: #ffd700; /* Cor de destaque para detalhes, como bordas de foco, notificações */
+            --accent-color: #ffd700;
+            /* Cor de destaque para detalhes, como bordas de foco, notificações */
 
             /* Cores que podem ser usadas universalmente ou ajustadas por modo */
             --darker-blue: #1A3B8A;
@@ -63,7 +64,8 @@
             /* Botão primário: um azul vibrante para destacar */
             --button-secondary-bg: #546a81;
             /* Botão secundário: cinza azulado médio */
-            --accent-color: #ffd700; /* Cor de destaque para detalhes, como bordas de foco, notificações */
+            --accent-color: #ffd700;
+            /* Cor de destaque para detalhes, como bordas de foco, notificações */
 
 
             /* Adaptando as cores de dark-mode existentes para as novas variáveis */
@@ -121,22 +123,28 @@
         header h1 {
             margin: 0;
             color: #FFFFFF;
-            font-size: 2.2em; /* Um pouco maior */
+            font-size: 2.2em;
+            /* Um pouco maior */
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            letter-spacing: -0.8px; /* Mais compacto */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Sombra para o título */
+            letter-spacing: -0.8px;
+            /* Mais compacto */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            /* Sombra para o título */
         }
 
         header a {
             text-decoration: none;
             margin: 0;
             color: #FFFFFF;
-            font-size: 1.2em; /* Um pouco maior */
+            font-size: 1.2em;
+            /* Um pouco maior */
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            letter-spacing: -0.8px; /* Mais compacto */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Sombra para o título */
+            letter-spacing: -0.8px;
+            /* Mais compacto */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            /* Sombra para o título */
         }
 
         .header-icons {
@@ -149,42 +157,21 @@
             background: none;
             border: none;
             color: #FFFFFF;
-            font-size: 1.8em; /* Ícones um pouco maiores */
+            font-size: 1.8em;
+            /* Ícones um pouco maiores */
             cursor: pointer;
             position: relative;
             transition: color 0.3s ease, transform 0.2s ease, text-shadow 0.2s ease;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Sombra para os ícones */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            /* Sombra para os ícones */
         }
 
         .header-icons .icon-btn:hover {
             transform: scale(1.1);
-            color: var(--accent-color); /* Cor de destaque no hover */
-            text-shadow: 0 0 8px var(--accent-color); /* Efeito de brilho */
-        }
-
-        .header-icons .notification-count {
-            position: absolute;
-            top: -8px; /* Ajustado */
-            right: -8px; /* Ajustado */
-            background-color: var(--red-danger);
-            color: white;
-            border-radius: 50%;
-            padding: 4px 8px; /* Ajustado */
-            font-size: 0.8em; /* Ajustado */
-            font-weight: bold;
-            display: none;
-            min-width: 24px; /* Ajustado */
-            text-align: center;
-            line-height: 1.2;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Sombra mais forte */
-            animation: pulseNotification 1.5s infinite ease-in-out; /* Animação de pulsação */
-        }
-
-        /* Animação para o contador de notificações */
-        @keyframes pulseNotification {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+            color: var(--accent-color);
+            /* Cor de destaque no hover */
+            text-shadow: 0 0 8px var(--accent-color);
+            /* Efeito de brilho */
         }
 
         /* Rodapé */
@@ -192,7 +179,8 @@
             background-color: var(--primary-color);
             color: #FFFFFF;
             text-align: center;
-            padding: 15px 0; /* Mais padding */
+            padding: 15px 0;
+            /* Mais padding */
             font-size: 0.9em;
             margin-top: auto;
             box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
@@ -205,7 +193,8 @@
             flex-direction: column;
             flex-grow: 1;
             padding: 20px 0;
-            animation: fadeIn 0.5s ease-out; /* Animação ao mostrar tela */
+            animation: fadeIn 0.5s ease-out;
+            /* Animação ao mostrar tela */
         }
 
         .screen.active {
@@ -214,8 +203,13 @@
 
         /* Animação de fade-in para telas */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         /* Estilos gerais para botões */
@@ -229,7 +223,8 @@
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
             font-family: 'Montserrat', sans-serif;
             letter-spacing: 0.2px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra padrão mais suave */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Sombra padrão mais suave */
         }
 
         button.primary {
@@ -239,8 +234,10 @@
 
         button.primary:hover {
             background-color: var(--darker-blue);
-            transform: translateY(-3px); /* Efeito mais pronunciado */
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombra mais forte no hover */
+            transform: translateY(-3px);
+            /* Efeito mais pronunciado */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            /* Sombra mais forte no hover */
         }
 
         button.secondary {
@@ -250,8 +247,10 @@
 
         button.secondary:hover {
             background-color: #8A8A8A;
-            transform: translateY(-3px); /* Efeito mais pronunciado */
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Sombra mais forte no hover */
+            transform: translateY(-3px);
+            /* Efeito mais pronunciado */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+            /* Sombra mais forte no hover */
         }
 
         button.danger {
@@ -261,8 +260,10 @@
 
         button.danger:hover {
             background-color: #CD3328;
-            transform: translateY(-3px); /* Efeito mais pronunciado */
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombra mais forte no hover */
+            transform: translateY(-3px);
+            /* Efeito mais pronunciado */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            /* Sombra mais forte no hover */
         }
 
         /* Estilos para campos de input */
@@ -281,7 +282,8 @@
             background-color: var(--medium-bg);
             color: var(--text-dark);
             transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.06); /* Sombra interna para profundidade */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+            /* Sombra interna para profundidade */
         }
 
         input[type="text"]:focus,
@@ -291,7 +293,8 @@
         select:focus {
             border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3), inset 0 1px 3px rgba(0,0,0,0.1); /* Sombra de foco mais visível */
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            /* Sombra de foco mais visível */
         }
 
         textarea {
@@ -303,9 +306,11 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: var(--text-dark); /* Texto da label mais escuro para melhor contraste */
+            color: var(--text-dark);
+            /* Texto da label mais escuro para melhor contraste */
             font-family: 'Roboto', sans-serif;
-            font-size: 0.95em; /* Ligeiramente menor */
+            font-size: 0.95em;
+            /* Ligeiramente menor */
         }
 
         h2,
@@ -318,18 +323,19 @@
         }
 
         h2 {
-            font-size: 2em; /* Um pouco maior */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-size: 2em;
+            /* Um pouco maior */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         h3 {
-            font-size: 1.6em; /* Um pouco maior */
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
+            font-size: 1.6em;
+            /* Um pouco maior */
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
         }
 
         .item-card,
-        .proof-card,
-        .my-proof-item {
+        .proof-card {
             background-color: var(--medium-bg);
             border-radius: 12px;
             padding: 20px;
@@ -339,22 +345,24 @@
             flex-direction: column;
             justify-content: space-between;
             transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease, transform 0.2s ease;
-            overflow: hidden; /* Para garantir que o border-radius funcione com a imagem */
+            overflow: hidden;
+            /* Para garantir que o border-radius funcione com a imagem */
         }
 
         .item-card:hover,
-        .proof-card:hover,
-        .my-proof-item:hover {
-            transform: translateY(-5px); /* Efeito de levitar no hover */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Sombra mais pronunciada */
+        .proof-card:hover {
+            transform: translateY(-5px);
+            /* Efeito de levitar no hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            /* Sombra mais pronunciada */
         }
 
         /* Animação para cards ao serem adicionados/carregados */
         .item-card.animated,
-        .proof-card.animated,
-        .my-proof-item.animated {
+        .proof-card.animated {
             animation: slideInUp 0.5s ease-out forwards;
-            opacity: 0; /* Começa invisível para a animação */
+            opacity: 0;
+            /* Começa invisível para a animação */
         }
 
         @keyframes slideInUp {
@@ -362,6 +370,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -370,75 +379,51 @@
 
 
         .item-card img,
-        .proof-card img,
-        .my-proof-item img {
+        .proof-card img {
             max-width: 100%;
             height: 160px;
             object-fit: cover;
-            border-radius: 8px; /* Cantos arredondados para a imagem */
+            border-radius: 8px;
+            /* Cantos arredondados para a imagem */
             margin-bottom: 15px;
             background-color: var(--border-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Sombra para a imagem */
-            border: 1px solid var(--border-color); /* Borda sutil para a imagem */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            /* Sombra para a imagem */
+            border: 1px solid var(--border-color);
+            /* Borda sutil para a imagem */
         }
 
         .item-card h4,
-        .proof-card p,
-        .my-proof-item p {
+        .proof-card p {
             color: var(--text-dark);
             margin-bottom: 8px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 1.1em; /* Títulos dos cards um pouco maiores */
+            font-size: 1.1em;
+            /* Títulos dos cards um pouco maiores */
         }
 
         .item-card p,
-        .proof-card small,
-        .my-proof-item small {
+        .proof-card small {
             font-size: 0.9em;
             color: var(--text-light);
-            line-height: 1.4; /* Mais espaçamento entre linhas para descrições */
+            line-height: 1.4;
+            /* Mais espaçamento entre linhas para descrições */
         }
 
         .item-card .primary,
         .proof-card .primary,
-        .proof-card .danger,
-        .my-proof-item .primary {
+        .proof-card .danger {
             margin-top: 20px;
             width: calc(100% - 20px);
             align-self: center;
         }
 
-        .item-card .button-group,
-        .my-proof-item .button-group {
+        .item-card .button-group {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-top: 20px;
-        }
-
-        .my-proof-item .status-tag {
-            display: inline-block;
-            padding: 7px 14px; /* Mais padding */
-            border-radius: 20px; /* Mais arredondado */
-            font-weight: bold;
-            font-size: 0.9em; /* Um pouco maior */
-            margin-top: 10px;
-            color: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Sombra para tags de status */
-        }
-
-        .my-proof-item .status-tag.pending {
-            background-color: var(--status-pending);
-            color: var(--text-dark);
-        }
-
-        .my-proof-item .status-tag.approved {
-            background-color: var(--status-approved);
-        }
-
-        .my-proof-item .status-tag.rejected {
-            background-color: var(--status-rejected);
         }
 
         .filter-buttons {
@@ -466,56 +451,15 @@
             background-color: #D5D5D5;
         }
 
-        #notificationScreen #notificationMessages,
-        #myProofsScreen #myProofsContainer {
+        #pendingProofsContainer,
+        #registeredItemsContainer {
             max-height: 400px;
             overflow-y: auto;
             padding-right: 15px;
             margin-bottom: 25px;
             margin-top: 20px;
-            padding: 15px; /* Adicionado padding para melhor visualização do scroll */
-        }
-
-        .notification-item {
-            background-color: var(--medium-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 18px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; /* Adicionada transição */
-            position: relative;
-        }
-        .notification-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .notification-item.unread {
-            background-color: rgba(var(--primary-color-rgb), 0.1);
-            border-left: 6px solid var(--primary-color);
-            padding-left: 15px;
-            font-weight: 600; /* Texto de notificação não lida mais negrito */
-        }
-
-        .notification-item .delete-notification {
-            background: none;
-            border: none;
-            color: var(--red-danger);
-            font-size: 0.95em;
-            cursor: pointer;
-            position: absolute;
-            bottom: 8px;
-            right: 15px;
-            padding: 5px 8px;
-            font-weight: 500;
-            border-radius: 5px;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-
-        .notification-item .delete-notification:hover {
-            background-color: rgba(244, 67, 54, 0.1);
-            color: #C0392B;
+            padding: 15px;
+            /* Adicionado padding para melhor visualização do scroll */
         }
 
         #globalMessage {
@@ -537,8 +481,10 @@
         @keyframes fadeInScale {
             from {
                 opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8); /* Começa menor */
+                transform: translate(-50%, -50%) scale(0.8);
+                /* Começa menor */
             }
+
             to {
                 opacity: 1;
                 transform: translate(-50%, -50%) scale(1);
@@ -547,7 +493,8 @@
 
         #globalMessage p {
             margin-bottom: 25px;
-            font-size: 1.4em; /* Um pouco maior */
+            font-size: 1.4em;
+            /* Um pouco maior */
             font-weight: 500;
         }
 
@@ -591,7 +538,8 @@
             display: flex;
             align-items: center;
             font-weight: normal;
-            color: var(--text-dark); /* Mais visível */
+            color: var(--text-dark);
+            /* Mais visível */
             cursor: pointer;
         }
 
@@ -607,7 +555,7 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             margin-top: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
         }
 
         body.dark-mode {
@@ -629,6 +577,7 @@
         .dark-mode .header-icons .icon-btn {
             color: var(--text-dark);
         }
+
         .dark-mode .header-icons .icon-btn:hover {
             color: var(--accent-color);
         }
@@ -651,7 +600,7 @@
             background-color: var(--medium-bg);
             color: var(--text-dark);
             border-color: var(--border-color);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .dark-mode input[type="text"]:focus,
@@ -660,7 +609,7 @@
         .dark-mode textarea:focus,
         .dark-mode select:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3), inset 0 1px 3px rgba(0,0,0,0.3);
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .dark-mode .filter-buttons button,
@@ -697,7 +646,6 @@
 
         .dark-mode .item-card,
         .dark-mode .proof-card,
-        .dark-mode .my-proof-item,
         .dark-mode #secretaryLogin form,
         .dark-mode #addNewItemForm form,
         .dark-mode #proofsList,
@@ -706,9 +654,9 @@
             background-color: var(--medium-bg) !important;
             box-shadow: 0 5px 15px var(--dark-mode-shadow);
         }
+
         .dark-mode .item-card:hover,
-        .dark-mode .proof-card:hover,
-        .dark-mode .my-proof-item:hover {
+        .dark-mode .proof-card:hover {
             box-shadow: 0 8px 20px var(--dark-mode-shadow);
         }
 
@@ -716,48 +664,20 @@
         .dark-mode .item-card h4,
         .dark-mode .item-card p,
         .dark-mode .proof-card p,
-        .dark-mode .proof-card strong,
-        .dark-mode .notification-item p,
-        .dark-mode .notification-item strong,
-        .dark-mode .my-proof-item p,
-        .dark-mode .my-proof-item strong {
+        .dark-mode .proof-card strong {
             color: var(--text-dark) !important;
         }
 
         .dark-mode .item-card img,
-        .dark-mode .proof-card img,
-        .dark-mode .my-proof-item img {
+        .dark-mode .proof-card img {
             background-color: var(--border-color);
             border: 1px solid var(--dark-mode-border);
         }
 
-        .dark-mode .notification-item,
-        .dark-mode .my-proof-item {
-            background-color: var(--medium-bg);
-            border-color: var(--border-color);
-        }
-
-        .dark-mode .notification-item.unread {
-            background-color: rgba(var(--primary-color-rgb), 0.1);
-            border-left-color: var(--primary-color);
-        }
-
-        .dark-mode .my-proof-item .status-tag.pending {
-            background-color: var(--status-pending);
-            color: var(--text-dark);
-        }
-
-        .dark-mode .my-proof-item .status-tag.approved {
-            background-color: var(--status-approved);
-        }
-
-        .dark-mode .my-proof-item .status-tag.rejected {
-            background-color: var(--status-rejected);
-        }
-
         @media (max-width: 768px) {
             header h1 {
-                font-size: 1.8em; /* Ajuste para mobile */
+                font-size: 1.8em;
+                /* Ajuste para mobile */
             }
 
             .header-icons {
@@ -765,7 +685,8 @@
             }
 
             .header-icons .icon-btn {
-                font-size: 1.5em; /* Ajuste para mobile */
+                font-size: 1.5em;
+                /* Ajuste para mobile */
             }
 
             .container {
@@ -784,14 +705,12 @@
 
             #foundItemsList,
             #pendingProofsContainer,
-            #registeredItemsContainer,
-            #myProofsContainer {
+            #registeredItemsContainer {
                 grid-template-columns: 1fr;
             }
 
             .item-card img,
-            .proof-card img,
-            .my-proof-item img {
+            .proof-card img {
                 height: 140px;
             }
 
@@ -803,12 +722,14 @@
             }
 
             h2 {
-                font-size: 1.6em; /* Ajuste para mobile */
+                font-size: 1.6em;
+                /* Ajuste para mobile */
                 margin-bottom: 20px;
             }
 
             h3 {
-                font-size: 1.3em; /* Ajuste para mobile */
+                font-size: 1.3em;
+                /* Ajuste para mobile */
                 margin-bottom: 20px;
             }
 
@@ -832,13 +753,6 @@
                 font-size: 0.95em;
             }
 
-            .notification-item,
-            .my-proof-item {
-                padding: 15px;
-                border-radius: 8px;
-                margin-bottom: 10px;
-            }
-
             #globalMessage {
                 padding: 25px;
                 border-radius: 12px;
@@ -854,81 +768,81 @@
 
 <body>
     <header>
-        <h1><a href="index.html">Achados e Perdidos</a></h1> <div class="header-icons">
+        <h1><a href="index.html">Achados e Perdidos</a></h1>
+        <div class="header-icons">
             <button class="icon-btn" id="darkModeToggle" title="Modo Noturno">🌙</button>
-            <button class="icon-btn" id="notificationBtn" title="Notificações">🔔<span class="notification-count"
-                    id="notificationCount">0</span></button>
             <button class="icon-btn" id="profileBtn" title="Acesso Secretaria">⚙️</button>
         </div>
     </header>
 
     <main class="container">
         <section id="studentHome" class="screen active">
-            <h2 style="text-align: center;">Itens Encontrados na Escola</h2> <input type="text" id="searchItem" placeholder="Pesquisar por nome ou descrição do item..."> <div class="filter-buttons">
-                <button class="secondary filter-btn active" data-category="todos">Todos</button> <button class="secondary filter-btn" data-category="material escolar">Material Escolar</button> <button class="secondary filter-btn" data-category="eletronicos">Eletrônicos</button> <button class="secondary filter-btn" data-category="roupas">Roupas</button> <button class="secondary filter-btn" data-category="documentos">Documentos</button> <button class="secondary filter-btn" data-category="outros">Outros</button> </div>
+            <h2 style="text-align: center;">Itens Encontrados na Escola</h2>
+            <input type="text" id="searchItem" placeholder="Pesquisar por nome ou descrição do item...">
+            <div class="filter-buttons">
+                <button class="secondary filter-btn active" data-category="todos">Todos</button>
+                <button class="secondary filter-btn" data-category="material escolar">Material Escolar</button>
+                <button class="secondary filter-btn" data-category="eletronicos">Eletrônicos</button>
+                <button class="secondary filter-btn" data-category="roupas">Roupas</button>
+                <button class="secondary filter-btn" data-category="documentos">Documentos</button>
+                <button class="secondary filter-btn" data-category="outros">Outros</button>
+            </div>
 
             <div id="foundItemsList"
                 style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
             </div>
             <p id="noFoundItemsMessage" style="text-align: center; color: #777; margin-top: 20px; display: none;">Nenhum
                 item encontrado no momento.</p>
-
-            <button class="secondary" id="viewMyProofsBtn">Minhas
-                Solicitações de Posse</button>
         </section>
 
         <section id="proofOfOwnership" class="screen">
-            <h2 style="text-align: center;">Comprovar Posse do Item</h2> <p style="text-align: center; color: var(--text-light); margin-bottom: 20px;">Preencha as informações
-                abaixo para confirmar posse.</p> <form id="proofForm">
+            <h2 style="text-align: center;">Comprovar Posse do Item</h2>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 20px;">Preencha as informações
+                abaixo para confirmar posse.</p>
+            <form id="proofForm">
                 <input type="hidden" id="proofItemId">
-                <label for="studentName">Seu nome completo <span style="color: var(--red-danger);">*</span></label> <input type="text" id="studentName" required>
+                <label for="studentName">Seu nome completo <span style="color: var(--red-danger);">*</span></label>
+                <input type="text" id="studentName" required>
 
-                <label for="studentClass">Sua turma <span style="color: var(--red-danger);">*</span></label> <input type="text" id="studentClass" required>
+                <label for="studentClass">Sua turma <span style="color: var(--red-danger);">*</span></label>
+                <input type="text" id="studentClass" required>
 
                 <label for="lostLocation">Onde você acha que perdeu <span
-                        style="color: var(--red-danger);">*</span></label> <input type="text" id="lostLocation" placeholder="Ex: pátio, sala de informática..." required> <label for="itemCharacteristic">Descreva um detalhe específico do item que NÃO está visível na
-                    foto:</label> <textarea id="itemCharacteristic" placeholder="Ex: arranhão, sigla, etc."></textarea> <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px;">
-                    <button type="submit" class="primary">Comprovar Posse</button> <button type="button" class="secondary" id="backToHomeProofBtn">Voltar ao Início</button> </div>
+                        style="color: var(--red-danger);">*</span></label>
+                <input type="text" id="lostLocation" placeholder="Ex: pátio, sala de informática..." required>
+                <label for="itemCharacteristic">Descreva um detalhe específico do item que NÃO está visível na
+                    foto:</label>
+                <textarea id="itemCharacteristic" placeholder="Ex: arranhão, sigla, etc."></textarea>
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px;">
+                    <button type="submit" class="primary">Comprovar Posse</button>
+                    <button type="button" class="secondary" id="backToHomeProofBtn">Voltar ao Início</button>
+                </div>
             </form>
         </section>
 
-        <section id="notificationScreen" class="screen">
-            <h2 style="text-align: center;">Suas Notificações</h2>
-            <p id="noNotificationsMessage"
-                style="text-align: center; color: var(--text-light); margin-top: 20px; display: none;">Nenhuma
-                notificação no momento.</p>
-            <div id="notificationMessages"
-                style="background-color: var(--medium-bg); padding: 25px; border-radius: 12px; margin-top: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
-            </div>
-            <button class="secondary" id="backToHomeNotificationsBtn">Voltar ao Início</button>
-        </section>
-
-        <section id="myProofsScreen" class="screen">
-            <h2 style="text-align: center;">Minhas Solicitações de Posse</h2>
-            <p id="noMyProofsMessage"
-                style="text-align: center; color: var(--text-light); grid-column: 1 / -1; margin-top: 20px; display: none;">
-                Nenhuma solicitação de posse enviada ainda.</p>
-            <div id="myProofsContainer"
-                style="background-color: var(--medium-bg); padding: 25px; border-radius: 12px; margin-top: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
-            </div>
-            <button class="secondary" id="backToHomeMyProofsBtn">Voltar ao Início</button>
-        </section>
-
-
         <section id="secretaryLogin" class="screen">
-            <h2 style="text-align: center;">Acesso da Secretaria</h2> <form id="loginForm">
-                <label for="secretaryEmail">E-mail:</label> <input type="email" id="secretaryEmail" required>
+            <h2 style="text-align: center;">Acesso da Secretaria</h2>
+            <form id="loginForm">
+                <label for="secretaryEmail">E-mail:</label>
+                <input type="email" id="secretaryEmail" required>
 
-                <label for="secretaryPassword">Senha:</label> <input type="password" id="secretaryPassword" required>
+                <label for="secretaryPassword">Senha:</label>
+                <input type="password" id="secretaryPassword" required>
 
                 <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px;">
-                    <button type="submit" class="primary">Login</button> <button type="button" class="secondary" id="backToHomeLoginBtn">Voltar ao Início</button> </div>
+                    <button type="submit" class="primary">Login</button>
+                    <button type="button" class="secondary" id="backToHomeLoginBtn">Voltar ao Início</button>
+                </div>
             </form>
         </section>
 
         <section id="secretaryDashboard" class="screen">
-            <h2 style="text-align: center;">Acesso da Secretaria</h2> <div class="secretary-tabs">
-                <button class="primary" id="viewProofsBtn">Ver Comprovações</button> <button class="primary" id="viewItemsBtn">Ver Itens Cadastrados</button> <button class="primary" id="addNewItemBtn">Cadastrar Novo Item</button> </div>
+            <h2 style="text-align: center;">Acesso da Secretaria</h2>
+            <div class="secretary-tabs">
+                <button class="primary" id="viewProofsBtn">Ver Comprovações</button>
+                <button class="primary" id="viewItemsBtn">Ver Itens Cadastrados</button>
+                <button class="primary" id="addNewItemBtn">Cadastrar Novo Item</button>
+            </div>
 
             <div id="proofsList"
                 style="background-color: var(--medium-bg); padding: 25px; border-radius: 12px; margin-top: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
@@ -956,27 +870,35 @@
                 <form id="itemRegistrationForm">
                     <input type="hidden" id="editItemId">
 
-                    <label for="itemName">Nome do item: <span style="color: var(--red-danger);">*</span></label> <input type="text" id="itemName" required>
+                    <label for="itemName">Nome do item: <span style="color: var(--red-danger);">*</span></label>
+                    <input type="text" id="itemName" required>
 
                     <label for="itemDescription">Descrição do item: <span
-                            style="color: var(--red-danger);">*</span></label> <textarea id="itemDescription" required></textarea>
+                            style="color: var(--red-danger);">*</span></label>
+                    <textarea id="itemDescription" required></textarea>
 
                     <label for="itemLocation">Local onde foi encontrado: <span
-                            style="color: var(--red-danger);">*</span></label> <input type="text" id="itemLocation" required>
+                            style="color: var(--red-danger);">*</span></label>
+                    <input type="text" id="itemLocation" required>
 
                     <label style="margin-top: 15px;">Selecione uma ou mais categorias do item: <span
-                            style="color: var(--red-danger);">*</span></label> <div class="category-checkboxes">
+                            style="color: var(--red-danger);">*</span></label>
+                    <div class="category-checkboxes">
                         <label><input type="checkbox" name="itemCategory" value="material escolar"> Material
-                            Escolar</label> <label><input type="checkbox" name="itemCategory" value="eletronicos"> Eletrônicos</label> <label><input type="checkbox" name="itemCategory" value="roupas"> Roupas</label>
+                            Escolar</label>
+                        <label><input type="checkbox" name="itemCategory" value="eletronicos"> Eletrônicos</label>
+                        <label><input type="checkbox" name="itemCategory" value="roupas"> Roupas</label>
                         <label><input type="checkbox" name="itemCategory" value="documentos"> Documentos</label>
                         <label><input type="checkbox" name="itemCategory" value="outros"> Outros</label>
                     </div>
 
-                    <label for="itemPhoto">Foto do item (opcional):</label> <input type="file" id="itemPhoto" accept="image/*" style="margin-bottom: 20px;">
+                    <label for="itemPhoto">Foto do item (opcional):</label>
+                    <input type="file" id="itemPhoto" accept="image/*" style="margin-bottom: 20px;">
                     <img id="itemPhotoPreview" src="#" alt="Pré-visualização da foto"
                         style="max-width: 180px; max-height: 180px; display: none; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.08);">
 
-                    <button type="submit" class="primary" id="addItemSubmitBtn">Adicionar Item</button> </form>
+                    <button type="submit" class="primary" id="addItemSubmitBtn">Adicionar Item</button>
+                </form>
             </div>
         </section>
 
@@ -996,20 +918,16 @@
 
     <script type="module" src="./firebaseconfig.js"></script>
 
-  <script type="module">
+    <script type="module">
         // Importa as instâncias de 'app' e 'db' do firebaseconfig.js
-        // REMOVIDO: Como o Cloud Storage NÃO está sendo usado, 'storage' não é importado.
-        import { app, db } from './firebaseconfig.js'; 
+        import { app, db } from './firebaseconfig.js';
 
         // Importa as funções específicas do Firestore SDK.
-        // Elas AINDA SÃO NECESSÁRIAS AQUI porque são usadas diretamente neste arquivo.
         import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-        // REMOVIDO: As importações do Storage SDK (ref, uploadBytes, getDownloadURL, deleteObject) foram removidas daqui.
 
         // Variáveis globais para armazenar os dados localmente após serem carregados do Firebase
         let itemsFound = [];
         let proofsOfOwnership = [];
-        let notifications = [];
 
         // --- Funções Auxiliares para Interação com Firebase Firestore ---
         async function loadCollection(collectionName) {
@@ -1080,7 +998,6 @@
         }
 
         // Não há necessidade de "deletar" Base64 do Storage, apenas da entrada do Firestore.
-        // Mas a função é mantida para consistência na chamada.
         async function deleteImage(photoUrl) {
             console.warn("Nenhuma imagem real para excluir (está embutida em Base64).");
             return; // Não faz nada
@@ -1091,15 +1008,13 @@
             try {
                 itemsFound = await loadCollection('itemsFound');
                 proofsOfOwnership = await loadCollection('proofsOfOwnership');
-                notifications = await loadCollection('notifications');
 
                 // Populando dados dummy APENAS SE AS COLEÇÕES ESTIVEREM VAZIAS
                 // REMOVA OU COMENTE ESTA CHAMADA APÓS A PRIMEIRA EXECUÇÃO
                 // E SEUS DADOS DUMMY APARECEREM NO FIREBASE.
                 // await populateDummyDataIfEmpty(); // <--- DESCOMENTE SE QUISER OS DUMMY NOVAMENTE
-                
+
                 renderFoundItems(); // Renderiza os itens na tela inicial do aluno
-                updateNotificationCount(); // Atualiza o contador de notificações
             } catch (error) {
                 console.error("Falha ao carregar dados iniciais do Firebase:", error);
                 showGlobalMessage('Erro ao carregar dados do sistema. Tente recarregar a página.', false, null, () => location.reload());
@@ -1109,11 +1024,9 @@
         async function populateDummyDataIfEmpty() {
             // Verifica se as coleções estão vazias consultando diretamente o Firebase
             let currentItems = await loadCollection('itemsFound');
-            let currentNotifications = await loadCollection('notifications');
             let currentProofs = await loadCollection('proofsOfOwnership');
 
             let shouldAddItems = currentItems.length === 0;
-            let shouldAddNotifications = currentNotifications.length === 0;
             let shouldAddProofs = currentProofs.length === 0;
 
             if (shouldAddItems) {
@@ -1159,27 +1072,7 @@
                 for (const item of dummyItems) {
                     await addDocument('itemsFound', item);
                 }
-                itemsFound = await loadCollection('itemsFound'); 
-            }
-
-            if (shouldAddNotifications) {
-                await addNotification({
-                    to: 'secretaria',
-                    title: 'Bem-vindo!',
-                    message: 'Bem-vindo ao sistema de Achados e Perdidos. Fique atento às notificações!',
-                    type: 'system',
-                    read: false,
-                    timestamp: new Date().toISOString()
-                });
-                await addNotification({
-                    to: 'aluno',
-                    title: 'Item Encontrado!',
-                    message: 'Um livro de matemática foi encontrado na biblioteca. Verifique se é seu!',
-                    type: 'found_item_alert',
-                    read: false,
-                    timestamp: new Date(Date.now() - 3600 * 1000).toISOString()
-                });
-                notifications = await loadCollection('notifications'); 
+                itemsFound = await loadCollection('itemsFound');
             }
 
             if (shouldAddProofs && itemsFound.length > 0) {
@@ -1228,7 +1121,7 @@
                 for (const proof of dummyProofs) {
                     await addDocument('proofsOfOwnership', proof);
                 }
-                proofsOfOwnership = await loadCollection('proofsOfOwnership'); 
+                proofsOfOwnership = await loadCollection('proofsOfOwnership');
             }
         }
 
@@ -1238,154 +1131,10 @@
                 screen.classList.remove('active');
             });
             document.getElementById(screenId).classList.add('active');
-            if (screenId === 'notificationScreen') {
-                renderNotificationScreenContent();
-            } else if (screenId === 'myProofsScreen') {
-                renderMyProofs();
-            }
             if (screenId === 'studentHome') {
                 renderFoundItems();
             }
             window.scrollTo(0, 0);
-        }
-
-        // --- Sistema de Notificações ---
-        async function addNotification(notification) {
-            try {
-                const newNotification = await addDocument('notifications', notification);
-                notifications.push(newNotification);
-                updateNotificationCount();
-            } catch (error) {
-                console.error("Falha ao adicionar notificação:", error);
-            }
-        }
-
-        function updateNotificationCount() {
-            const unreadNotifications = notifications.filter(n => !n.read && n.to !== 'secretaria');
-            const countElement = document.getElementById('notificationCount');
-            if (unreadNotifications.length > 0) {
-                countElement.textContent = unreadNotifications.length;
-                countElement.style.display = 'block';
-                countElement.classList.add('pulseNotification'); 
-            } else {
-                countElement.style.display = 'none';
-                countElement.classList.remove('pulseNotification');
-            }
-        }
-
-        function renderNotificationScreenContent() {
-            const notificationMessages = document.getElementById('notificationMessages');
-            const noNotificationsMessageElement = document.getElementById('noNotificationsMessage');
-
-            notificationMessages.innerHTML = '';
-
-            const studentNotifications = notifications.filter(n => n.to !== 'secretaria').slice().reverse();
-
-            if (studentNotifications.length === 0) {
-                noNotificationsMessageElement.style.display = 'block';
-            } else {
-                noNotificationsMessageElement.style.display = 'none';
-                studentNotifications.forEach(async n => {
-                    const notificationDiv = document.createElement('div');
-                    notificationDiv.classList.add('notification-item');
-                    notificationDiv.classList.add('animated'); 
-                    if (!n.read) {
-                        notificationDiv.classList.add('unread');
-                        try {
-                            await updateDocument('notifications', n.id, { read: true });
-                            n.read = true; 
-                        } catch (error) {
-                            console.error(`Erro ao marcar notificação ${n.id} como lida:`, error);
-                        }
-                    }
-                    notificationDiv.dataset.id = n.id;
-                    notificationDiv.innerHTML = `
-                        <p><strong>${n.title}</strong></p>
-                        <p>${n.message}</p>
-                        <small>${new Date(n.timestamp).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</small>
-                        <button class="delete-notification">Apagar</button>
-                    `;
-                    notificationMessages.appendChild(notificationDiv);
-                });
-            }
-            updateNotificationCount();
-        }
-
-        document.getElementById('notificationMessages').addEventListener('click', async (event) => {
-            if (event.target.classList.contains('delete-notification')) {
-                const notificationElement = event.target.closest('.notification-item');
-                const notificationId = notificationElement.dataset.id;
-                if (notificationId) {
-                    try {
-                        await deleteDocument('notifications', notificationId);
-                        notifications = notifications.filter(n => n.id !== notificationId); 
-                        renderNotificationScreenContent();
-                    }
-                    catch (error) {
-                        console.error("Falha ao apagar notificação:", error);
-                        showGlobalMessage('Erro ao apagar notificação. Tente novamente.', false, null, () => {});
-                    }
-                }
-            }
-        });
-
-        // --- Renderização de Minhas Comprovações de Posse (Aluno) ---
-        async function renderMyProofs() {
-            proofsOfOwnership = await loadCollection('proofsOfOwnership');
-            itemsFound = await loadCollection('itemsFound');
-
-            const container = document.getElementById('myProofsContainer');
-            const noMyProofsMessageElement = document.getElementById('noMyProofsMessage');
-
-            container.innerHTML = '';
-            const studentProofs = proofsOfOwnership.slice().sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); 
-
-            if (studentProofs.length === 0) {
-                noMyProofsMessageElement.style.display = 'block';
-            } else {
-                noMyProofsMessageElement.style.display = 'none';
-                studentProofs.forEach((proof, index) => {
-                    const itemAssociated = itemsFound.find(item => item.id === proof.itemId);
-                    const proofItem = document.createElement('div');
-                    proofItem.classList.add('my-proof-item');
-                    proofItem.classList.add('animated'); 
-                    proofItem.style.animationDelay = `${index * 0.05}s`; 
-
-                    let statusClass = '';
-                    let statusText = '';
-                    switch (proof.status) {
-                        case 'pendente':
-                            statusClass = 'pending';
-                            statusText = 'Pendente';
-                            break;
-                        case 'aprovado':
-                            statusClass = 'approved';
-                            statusText = 'Aprovado';
-                            break;
-                        case 'rejeitado':
-                            statusClass = 'rejected';
-                            statusText = 'Rejeitado';
-                            break;
-                        default:
-                            statusClass = '';
-                            statusText = 'Desconhecido';
-                            break;
-                    }
-
-                    proofItem.innerHTML = `
-                        ${itemAssociated && itemAssociated.photo
-                            ? `<img src="${itemAssociated.photo}" alt="${itemAssociated.name}">`
-                            : `<div style="width: 100%; height: 160px; background-color: #ccc; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: #666; margin-bottom: 15px; font-size: 0.9em;">Item sem Imagem ou item original não encontrado</div>`
-                        }
-                        <p style="font-weight: 600; margin-bottom: 5px;">Item: ${proof.itemName || 'Item Desconhecido'}</p>
-                        <p style="font-size: 0.9em; color: var(--text-light); margin-bottom: 5px;"><strong>Turma:</strong> ${proof.studentClass || 'N/A'}</p>
-                        <p style="font-size: 0.9em; color: var(--text-light); margin-bottom: 5px;"><strong>Local Perdido:</strong> ${proof.lostLocation || 'N/A'}</p>
-                        <p style="margin-top: 10px;"><strong>Status:</strong> <span class="status-tag ${statusClass}">${statusText}</span></p>
-                        <small style="font-size: 0.8em; color: var(--text-light); margin-top: auto; padding-top: 10px;">Enviado em: ${new Date(proof.timestamp).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })}</small>
-                    `;
-                    container.appendChild(proofItem);
-                });
-            }
         }
 
         // --- Mensagem Global de Feedback (com Desfazer/Continuar) ---
@@ -1397,7 +1146,7 @@
 
             if (showUndo && undoCallback) {
                 undoBtn.style.display = 'inline-block';
-                undoBtn.onclick = null; 
+                undoBtn.onclick = null;
                 undoBtn.addEventListener('click', function handler() {
                     undoCallback();
                     globalMessage.style.display = 'none';
@@ -1407,7 +1156,7 @@
                 undoBtn.style.display = 'none';
             }
 
-            continueBtn.onclick = null; 
+            continueBtn.onclick = null;
             continueBtn.addEventListener('click', function handler() {
                 if (continueCallback) continueCallback();
                 globalMessage.style.display = 'none';
@@ -1419,25 +1168,15 @@
 
         // --- Event Listeners Globais ---
         document.addEventListener('DOMContentLoaded', () => {
-            initializeAppData(); 
+            initializeAppData();
 
             // Botões do Header
-            document.getElementById('notificationBtn').addEventListener('click', () => {
-                showScreen('notificationScreen');
-            });
             document.getElementById('profileBtn').addEventListener('click', () => {
                 showScreen('secretaryLogin');
             });
 
-            // Botão "Minhas Solicitações de Posse" na tela do aluno
-            document.getElementById('viewMyProofsBtn').addEventListener('click', () => {
-                showScreen('myProofsScreen');
-            });
-
             // Botões "Voltar para o Início" (usando IDs específicos)
             document.getElementById('backToHomeProofBtn').addEventListener('click', () => showScreen('studentHome'));
-            document.getElementById('backToHomeNotificationsBtn').addEventListener('click', () => showScreen('studentHome'));
-            document.getElementById('backToHomeMyProofsBtn').addEventListener('click', () => showScreen('studentHome'));
             document.getElementById('backToHomeLoginBtn').addEventListener('click', () => showScreen('studentHome'));
 
 
@@ -1461,7 +1200,7 @@
         function renderFoundItems(filter = 'todos', searchTerm = '') {
             const container = document.getElementById('foundItemsList');
             container.innerHTML = '';
-            let filteredItems = itemsFound; 
+            let filteredItems = itemsFound;
 
             if (filter !== 'todos') {
                 filteredItems = filteredItems.filter(item => item.categories.includes(filter));
@@ -1486,8 +1225,8 @@
             filteredItems.forEach((item, index) => { // Adicionado index para stagger animation
                 const itemCard = document.createElement('div');
                 itemCard.classList.add('item-card');
-                itemCard.classList.add('animated'); 
-                itemCard.style.animationDelay = `${index * 0.05}s`; 
+                itemCard.classList.add('animated');
+                itemCard.style.animationDelay = `${index * 0.05}s`;
 
                 itemCard.innerHTML = `
                     ${item.photo
@@ -1546,20 +1285,13 @@
                 studentClass: document.getElementById('studentClass').value,
                 lostLocation: document.getElementById('lostLocation').value,
                 itemCharacteristic: document.getElementById('itemCharacteristic').value,
-                status: 'pendente', 
+                status: 'pendente',
                 timestamp: new Date().toISOString()
             };
 
             try {
                 const newProof = await addDocument('proofsOfOwnership', proof);
-                proofsOfOwnership.push(newProof); 
-
-                await addNotification({
-                    to: 'secretaria',
-                    title: 'Nova Comprovação de Posse',
-                    message: `O aluno(a) ${proof.studentName} da turma ${proof.studentClass} enviou uma comprovação para o item: "${item.name}".`,
-                    type: 'new_proof',
-                });
+                proofsOfOwnership.push(newProof);
 
                 showGlobalMessage('Enviamos uma notificação para a secretaria. Aguarde a sua resposta.', false, null, () => {
                     showScreen('studentHome');
@@ -1567,12 +1299,12 @@
                 });
             } catch (error) {
                 console.error("Falha ao enviar comprovação:", error);
-                showGlobalMessage('Erro ao enviar comprovação. Tente novamente.', false, null, () => {});
+                showGlobalMessage('Erro ao enviar comprovação. Tente novamente.', false, null, () => { });
             }
         });
 
         // --- Login da Secretaria ---
-        const SECRETARY_EMAIL = 'secretaria@etec.com'; 
+        const SECRETARY_EMAIL = 'secretaria@etec.com';
         const SECRETARY_PASSWORD = 'senha123';
 
         document.getElementById('loginForm').addEventListener('submit', (event) => {
@@ -1583,7 +1315,7 @@
             if (email === SECRETARY_EMAIL && password === SECRETARY_PASSWORD) {
                 alert('Login bem-sucedido!');
                 showScreen('secretaryDashboard');
-                showSecretarySubTab('proofsList'); 
+                showSecretarySubTab('proofsList');
             } else {
                 alert('Email ou senha incorretos.');
             }
@@ -1623,7 +1355,7 @@
 
             const container = document.getElementById('pendingProofsContainer');
             container.innerHTML = '';
-            const pendingProofs = proofsOfOwnership.filter(proof => proof.status === 'pendente').sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); 
+            const pendingProofs = proofsOfOwnership.filter(proof => proof.status === 'pendente').sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
             if (pendingProofs.length === 0) {
                 document.getElementById('noProofsMessage').style.display = 'block';
@@ -1635,29 +1367,8 @@
                 const itemAssociated = itemsFound.find(item => item.id === proof.itemId);
                 const proofCard = document.createElement('div');
                 proofCard.classList.add('proof-card');
-                proofCard.classList.add('animated'); 
-                proofCard.style.animationDelay = `${index * 0.05}s`; 
-
-                let statusClass = '';
-                let statusText = '';
-                switch (proof.status) {
-                    case 'pendente':
-                        statusClass = 'pending';
-                        statusText = 'Pendente';
-                        break;
-                    case 'aprovado':
-                        statusClass = 'approved';
-                        statusText = 'Aprovado';
-                        break;
-                    case 'rejeitado':
-                        statusClass = 'rejected';
-                        statusText = 'Rejeitado';
-                        break;
-                    default:
-                        statusClass = '';
-                        statusText = 'Desconhecido';
-                        break;
-                }
+                proofCard.classList.add('animated');
+                proofCard.style.animationDelay = `${index * 0.05}s`;
 
                 proofCard.innerHTML = `
                     ${itemAssociated && itemAssociated.photo
@@ -1690,7 +1401,7 @@
                 const proof = proofsOfOwnership[proofIndex];
                 try {
                     await updateDocument('proofsOfOwnership', proofId, { status: status });
-                    proofsOfOwnership[proofIndex].status = status; 
+                    proofsOfOwnership[proofIndex].status = status;
 
                     // Se a comprovação for aprovada, exclua o item da lista de itens encontrados
                     if (status === 'aprovado') {
@@ -1701,21 +1412,13 @@
                         }
                     }
 
-                    await addNotification({
-                        to: 'aluno',
-                        title: `Sua Comprovação do item "${proof.itemName}" foi ${status === 'aprovado' ? 'Aprovada' : 'Rejeitada'}`,
-                        message: `A secretaria revisou sua solicitação para o item "${proof.itemName}". Status: ${status.toUpperCase()}.`,
-                        type: 'proof_response',
-                    });
-
                     showGlobalMessage(`Comprovação ${status} com sucesso!`, false, null, () => {
                         renderProofsOfOwnership();
-                        renderMyProofs();
                         renderFoundItems(); // Re-renderiza os itens encontrados para refletir a remoção
                     });
                 } catch (error) {
                     console.error(`Falha ao ${status} comprovação:`, error);
-                    showGlobalMessage(`Erro ao ${status} comprovação. Tente novamente.`, false, null, () => {});
+                    showGlobalMessage(`Erro ao ${status} comprovação. Tente novamente.`, false, null, () => { });
                 }
             }
         }
@@ -1733,11 +1436,11 @@
                 document.getElementById('noRegisteredItemsMessage').style.display = 'none';
             }
 
-            itemsFound.forEach((item, index) => { 
+            itemsFound.forEach((item, index) => {
                 const itemCard = document.createElement('div');
                 itemCard.classList.add('item-card');
-                itemCard.classList.add('animated'); 
-                itemCard.style.animationDelay = `${index * 0.05}s`; 
+                itemCard.classList.add('animated');
+                itemCard.style.animationDelay = `${index * 0.05}s`;
 
                 itemCard.innerHTML = `
                     ${item.photo
@@ -1760,7 +1463,7 @@
                 btn.addEventListener('click', (event) => editItem(event.target.dataset.itemId));
             });
             document.querySelectorAll('.delete-item-btn').forEach(btn => {
-                btn.addEventListener('click', (event) => deleteItem(event.target.dataset.itemId)); 
+                btn.addEventListener('click', (event) => deleteItem(event.target.dataset.itemId));
             });
         }
 
@@ -1773,26 +1476,26 @@
             const location = document.getElementById('itemLocation').value;
             const categories = Array.from(document.querySelectorAll('input[name="itemCategory"]:checked')).map(cb => cb.value);
             const photoFile = document.getElementById('itemPhoto').files[0];
-            let currentPhotoURL = document.getElementById('itemPhotoPreview').src; 
+            let currentPhotoURL = document.getElementById('itemPhotoPreview').src;
 
             if (categories.length === 0) {
                 alert('Selecione ao menos uma categoria para o item.');
                 return;
             }
 
-            let photoToSave = ''; 
+            let photoToSave = '';
 
-            if (photoFile) { 
+            if (photoFile) {
                 // Se um novo arquivo foi selecionado, converte para Base64 e salva.
-                photoToSave = await uploadImage(photoFile); 
-            } else if (itemId) { 
+                photoToSave = await uploadImage(photoFile);
+            } else if (itemId) {
                 // Se está editando e NENHUM novo arquivo foi selecionado, mantém a foto existente se for uma Base64 válida
                 // ou um placeholder externo que já estava lá (não um '#' ou placeholder temporário do FileReader).
                 if (currentPhotoURL && !currentPhotoURL.includes('placeholder.com') && currentPhotoURL.startsWith('data:image/')) {
                     photoToSave = currentPhotoURL;
                 } else if (currentPhotoURL && currentPhotoURL.includes('placeholder.com')) {
-                     // Se era um placeholder do sistema, mantém o mesmo.
-                     photoToSave = currentPhotoURL;
+                    // Se era um placeholder do sistema, mantém o mesmo.
+                    photoToSave = currentPhotoURL;
                 }
             }
 
@@ -1806,23 +1509,17 @@
             };
 
             try {
-                if (itemId) { 
+                if (itemId) {
                     const updatedItem = await updateDocument('itemsFound', itemId, itemData);
                     const index = itemsFound.findIndex(item => item.id === itemId);
-                    if (index > -1) itemsFound[index] = updatedItem; 
+                    if (index > -1) itemsFound[index] = updatedItem;
                     showGlobalMessage('Item editado com sucesso!', false, null, () => {
                         showSecretarySubTab('secretaryItemsList');
                         renderFoundItems();
                     });
-                } else { 
+                } else {
                     const newItem = await addDocument('itemsFound', itemData);
                     itemsFound.push(newItem);
-                    await addNotification({
-                        to: 'aluno',
-                        title: `Novo item encontrado: ${newItem.name}`,
-                        message: `Um ${newItem.name} foi encontrado e adicionado à lista de achados e perdidos. Verifique se é seu!`,
-                        type: 'new_item_found',
-                    });
                     showGlobalMessage('Item adicionado com sucesso!', true, async () => {
                         try {
                             await deleteDocument('itemsFound', newItem.id);
@@ -1847,7 +1544,7 @@
                 document.querySelectorAll('input[name="itemCategory"]').forEach(cb => cb.checked = false);
             } catch (error) {
                 console.error("Falha ao salvar item:", error);
-                showGlobalMessage('Erro ao salvar item. Tente novamente.', false, null, () => {});
+                showGlobalMessage('Erro ao salvar item. Tente novamente.', false, null, () => { });
             }
         });
 
@@ -1898,7 +1595,7 @@
                 const deletedItem = itemsFound[itemIndex];
                 try {
                     await deleteDocument('itemsFound', id);
-                    itemsFound.splice(itemIndex, 1); 
+                    itemsFound.splice(itemIndex, 1);
 
                     showGlobalMessage(`Item "${deletedItem.name}" excluído com sucesso!`, true, async () => {
                         try {
@@ -1907,7 +1604,7 @@
                                 description: deletedItem.description,
                                 location: deletedItem.location,
                                 categories: deletedItem.categories,
-                                photo: deletedItem.photo 
+                                photo: deletedItem.photo
                             });
                             itemsFound.splice(itemIndex, 0, restoredItem);
                             renderSecretaryItems();
@@ -1922,10 +1619,13 @@
                     });
                 } catch (error) {
                     console.error("Falha ao excluir item:", error);
-                    showGlobalMessage('Erro ao excluir item. Tente novamente.', false, null, () => {});
+                    showGlobalMessage('Erro ao excluir item. Tente novamente.', false, null, () => { });
                 }
             }
         }
+    </script>
+    <script data-cky-tag="UserWay" data-uw-rm-ext-skip-init="true"
+        src="https://cdn.userway.org/widget.js" data-uw-global-object="UserWay">
     </script>
 </body>
 
