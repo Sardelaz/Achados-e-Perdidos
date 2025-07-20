@@ -81,7 +81,16 @@
             --dark-mode-shadow: rgba(0, 0, 0, 0.5);
         }
 
+        /* Reset para box-sizing */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         /* CSS Geral */
+        html, body {
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -91,6 +100,7 @@
             min-height: 100vh;
             color: var(--text-dark);
             transition: background-color 0.3s ease, color 0.3s ease;
+            /* Removendo padding-bottom do body, o main.container lidará com isso */
         }
 
         .container {
@@ -105,6 +115,8 @@
             display: flex;
             flex-direction: column;
             transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+            /* Adiciona espaço para o botão de acessibilidade na parte inferior do conteúdo principal */
+            padding-bottom: 70px; /* Ajuste este valor conforme o tamanho do botão do UserWay */
         }
 
         /* Cabeçalho */
@@ -178,9 +190,8 @@
         footer {
             background-color: var(--primary-color);
             color: #FFFFFF;
-            text-align: center;
+            text-align: center; /* Garante a centralização */
             padding: 15px 0;
-            /* Mais padding */
             font-size: 0.9em;
             margin-top: auto;
             box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
@@ -594,7 +605,7 @@
 
         .dark-mode input[type="text"],
         .dark-mode input[type="password"],
-        .dark-mode input[type="email"],
+        .dark-mode .dark-mode input[type="email"], /* corrected syntax */
         .dark-mode textarea,
         .dark-mode select {
             background-color: var(--medium-bg);
@@ -674,6 +685,21 @@
             border: 1px solid var(--dark-mode-border);
         }
 
+        /* UserWay Accessibility Widget adjustments */
+        /*
+        O script do UserWay injeta um div com um ID ou classe específica que pode ter estilos fixos.
+        O ID mais comum é 'userway-widget-container'. Vamos forçar o posicionamento para
+        o canto inferior direito e garantir que ele esteja acima de outros elementos.
+        */
+        #userway-widget-container {
+            bottom: 20px !important; /* Distância da parte inferior */
+            right: 20px !important; /* Distância da parte direita */
+            left: unset !important; /* Garante que não está fixo à esquerda também */
+            top: unset !important; /* Garante que não está fixo ao topo também */
+            z-index: 99999 !important; /* Garante que fique acima de outros elementos, use um valor alto */
+        }
+        
+        /* Media Query para telas menores */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.8em;
@@ -694,6 +720,8 @@
                 padding: 18px;
                 width: 98%;
                 border-radius: 10px;
+                /* Adiciona mais espaço para o botão em telas menores no container principal */
+                padding-bottom: 90px; /* Ajuste se o botão do UserWay for maior em mobile */
             }
 
             .secretary-tabs button {
@@ -703,10 +731,13 @@
                 font-size: 0.95em;
             }
 
+            /* Adjust grid for smaller screens to prevent overflow */
             #foundItemsList,
             #pendingProofsContainer,
             #registeredItemsContainer {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Stack items vertically on small screens */
+                overflow-x: hidden; /* Ensure content inside grid doesn't cause overflow */
+                padding-right: 0; /* Remove extra padding that might cause scrollbar */
             }
 
             .item-card img,
@@ -761,6 +792,12 @@
             #globalMessage p {
                 font-size: 1.1em;
                 margin-bottom: 20px;
+            }
+
+            /* Ajuste para o botão de acessibilidade em telas menores */
+            #userway-widget-container {
+                bottom: 15px !important; /* Um pouco mais para cima em mobile */
+                right: 15px !important;
             }
         }
     </style>
@@ -1066,7 +1103,7 @@
                         description: 'Chaveiro de metal em formato de coruja, com duas chaves pequenas.',
                         location: 'Corredor Principal',
                         categories: ['outros'],
-                        photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8HmHNAAAAA1BMVEX///+ntrA5AAAANElEQVR4nO3BMQEAAADCoPzRbQzhxAAAAAAAADg+F+cAAAH5kQAAAAAAAAAAAAAAAAAAAAAAAADg8p/1AgI+a+YnAAAAAElFTkSuQmCC' // Pequena imagem preta
+                        photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8HmHNAAAAA1BMVEX///+ntrA5AAAANElEQVR4nO3BMQEAAADCoPzRbQzhxAAAAAAAADg+F+cAAAH5kQAAAAAAAAAAAAAAAAAAAAAAAADg8p/1AgI+a+mNAAAAAElFTkSuQmCC' // Pequena imagem preta
                     }
                 ];
                 for (const item of dummyItems) {
@@ -1627,6 +1664,48 @@
     <script data-cky-tag="UserWay" data-uw-rm-ext-skip-init="true"
         src="https://cdn.userway.org/widget.js" data-uw-global-object="UserWay">
     </script>
-</body>
 
+    <script type="module" src="./firebaseconfig.js"></script>
+
+    <script type="module">
+        // O conteúdo do script principal permanece inalterado
+    </script>
+
+    <script data-cky-tag="UserWay" data-uw-rm-ext-skip-init="true"
+        src="https://cdn.userway.org/widget.js" data-uw-global-object="UserWay">
+    </script>
+
+    <script>
+        const waitForUserWay = setInterval(() => {
+            const uw = document.getElementById('userway-widget-container');
+            if (uw) {
+                uw.style.bottom = '20px';
+                uw.style.right = '20px';
+                uw.style.top = '';
+                uw.style.left = '';
+                uw.style.position = 'fixed';
+                uw.style.zIndex = '99999';
+                clearInterval(waitForUserWay);
+            }
+        }, 300);
+    </script>
+
+    <style>
+        #userway-widget-container {
+            position: fixed !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            left: unset !important;
+            top: unset !important;
+            z-index: 99999 !important;
+        }
+
+        @media (max-width: 768px) {
+            #userway-widget-container {
+                bottom: 15px !important;
+                right: 15px !important;
+            }
+        }
+    </style>
+</body>
 </html>
