@@ -105,7 +105,6 @@
             min-height: 100vh;
             color: var(--text-dark);
             transition: background-color 0.3s ease, color 0.3s ease;
-            /* Removendo padding-bottom do body, o main.container lidará com isso */
         }
 
         .container {
@@ -120,9 +119,8 @@
             display: flex;
             flex-direction: column;
             transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
-            /* Adiciona espaço para o botão de acessibilidade na parte inferior do conteúdo principal */
             padding-bottom: 70px;
-            /* Ajuste este valor conforme o tamanho do botão do UserWay */
+            /* Adiciona espaço para o botão de acessibilidade */
         }
 
         /* Cabeçalho */
@@ -131,24 +129,49 @@
             color: #FFFFFF;
             padding: 15px 25px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
+            /* Aligns items to the start (left) */
             align-items: center;
             border-bottom: 5px solid var(--darker-blue);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             transition: background-color 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            /* Needed for absolute positioning of title on mobile */
+        }
+
+        header .header-content {
+            flex-grow: 1;
+            /* Allows content to take available space */
+            display: flex;
+            justify-content: center;
+            /* Center the h1 relative to its space */
+            align-items: center;
+            margin-right: auto;
+            /* Pushes header-content and title to the left, making space for icons */
+        }
+
+        .header-logo {
+            display: block;
+            margin-left: 40px;
+            min-width: 40px;
+            /* Ensure logo always has space */
+        }
+
+        .header-logo img {
+            height: 80px;
+            width: auto;
         }
 
         header h1 {
             margin: 0;
             color: #FFFFFF;
             font-size: 2.2em;
-            /* Um pouco maior */
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             letter-spacing: -0.8px;
-            /* Mais compacto */
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-            /* Sombra para o título */
+            white-space: nowrap;
+            /* Prevent title from wrapping */
         }
 
         header a {
@@ -156,19 +179,20 @@
             margin: 0;
             color: #FFFFFF;
             font-size: 1.2em;
-            /* Um pouco maior */
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             letter-spacing: -0.8px;
-            /* Mais compacto */
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-            /* Sombra para o título */
         }
 
+        /* Desktop icons */
         .header-icons {
             display: flex;
+            /* Always display flex on desktop */
             gap: 18px;
             align-items: center;
+            margin-right: 70px;
+            /* Adjust this value to move icons more to the left */
         }
 
         .header-icons .icon-btn {
@@ -176,20 +200,56 @@
             border: none;
             color: #FFFFFF;
             font-size: 1.8em;
-            /* Ícones um pouco maiores */
             cursor: pointer;
             position: relative;
             transition: color 0.3s ease, transform 0.2s ease, text-shadow 0.2s ease;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-            /* Sombra para os ícones */
         }
 
         .header-icons .icon-btn:hover {
             transform: scale(1.1);
             color: var(--accent-color);
-            /* Cor de destaque no hover */
             text-shadow: 0 0 8px var(--accent-color);
-            /* Efeito de brilho */
+        }
+
+        /* Novo Nav para Mobile */
+        .mobile-nav {
+            display: none;
+            /* Hidden by default, shown on mobile */
+            background-color: var(--primary-color);
+            padding: 10px 0;
+            border-bottom: 3px solid var(--darker-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            z-index: 10;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .mobile-nav li {
+            display: inline-block;
+        }
+
+        .mobile-nav .nav-btn {
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            font-size: 1.1em;
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .mobile-nav .nav-btn:hover {
+            background-color: var(--darker-blue);
         }
 
         /* Rodapé */
@@ -197,7 +257,6 @@
             background-color: var(--primary-color);
             color: #FFFFFF;
             text-align: center;
-            /* Garante a centralização */
             padding: 15px 0;
             font-size: 0.9em;
             margin-top: auto;
@@ -212,7 +271,6 @@
             flex-grow: 1;
             padding: 20px 0;
             animation: fadeIn 0.5s ease-out;
-            /* Animação ao mostrar tela */
         }
 
         .screen.active {
@@ -242,7 +300,6 @@
             font-family: 'Montserrat', sans-serif;
             letter-spacing: 0.2px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            /* Sombra padrão mais suave */
         }
 
         button.primary {
@@ -253,9 +310,7 @@
         button.primary:hover {
             background-color: var(--darker-blue);
             transform: translateY(-3px);
-            /* Efeito mais pronunciado */
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-            /* Sombra mais forte no hover */
         }
 
         button.secondary {
@@ -266,9 +321,7 @@
         button.secondary:hover {
             background-color: #8A8A8A;
             transform: translateY(-3px);
-            /* Efeito mais pronunciado */
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-            /* Sombra mais forte no hover */
         }
 
         button.danger {
@@ -279,9 +332,7 @@
         button.danger:hover {
             background-color: #CD3328;
             transform: translateY(-3px);
-            /* Efeito mais pronunciado */
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-            /* Sombra mais forte no hover */
         }
 
         /* Estilos para campos de input */
@@ -301,7 +352,6 @@
             color: var(--text-dark);
             transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
-            /* Sombra interna para profundidade */
         }
 
         input[type="text"]:focus,
@@ -311,8 +361,7 @@
         select:focus {
             border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.1);
-            /* Sombra de foco mais visível */
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 63, 110, 188), 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         textarea {
@@ -325,10 +374,8 @@
             margin-bottom: 8px;
             font-weight: 500;
             color: var(--text-dark);
-            /* Texto da label mais escuro para melhor contraste */
             font-family: 'Roboto', sans-serif;
             font-size: 0.95em;
-            /* Ligeiramente menor */
         }
 
         h2,
@@ -342,13 +389,11 @@
 
         h2 {
             font-size: 2em;
-            /* Um pouco maior */
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         h3 {
             font-size: 1.6em;
-            /* Um pouco maior */
             text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
         }
 
@@ -364,15 +409,12 @@
             justify-content: space-between;
             transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease, transform 0.2s ease;
             overflow: hidden;
-            /* Para garantir que o border-radius funcione com a imagem */
         }
 
         .item-card:hover,
         .proof-card:hover {
             transform: translateY(-5px);
-            /* Efeito de levitar no hover */
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            /* Sombra mais pronunciada */
         }
 
         /* Animação para cards ao serem adicionados/carregados */
@@ -380,7 +422,6 @@
         .proof-card.animated {
             animation: slideInUp 0.5s ease-out forwards;
             opacity: 0;
-            /* Começa invisível para a animação */
         }
 
         @keyframes slideInUp {
@@ -395,20 +436,16 @@
             }
         }
 
-
         .item-card img,
         .proof-card img {
             max-width: 100%;
             height: 160px;
             object-fit: cover;
             border-radius: 8px;
-            /* Cantos arredondados para a imagem */
             margin-bottom: 15px;
-            background-color: #ccc; /* Cor de fundo para itens sem imagem ou durante o carregamento */
+            background-color: #ccc;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-            /* Sombra para a imagem */
             border: 1px solid var(--border-color);
-            /* Borda sutil para a imagem */
         }
 
         .item-card h4,
@@ -418,7 +455,6 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
             font-size: 1.1em;
-            /* Títulos dos cards um pouco maiores */
         }
 
         .item-card p,
@@ -426,7 +462,6 @@
             font-size: 0.9em;
             color: var(--text-light);
             line-height: 1.4;
-            /* Mais espaçamento entre linhas para descrições */
         }
 
         .item-card .primary,
@@ -470,15 +505,22 @@
         }
 
         #pendingProofsContainer,
-        #registeredItemsContainer {
-            max-height: 400px;
+        #registeredItemsContainer,
+        #foundItemsList {
+            max-height: 500px;
+            /* Increased max height for better viewing */
             overflow-y: auto;
-            padding-right: 15px;
+            padding-right: 10px;
+            /* Space for scrollbar */
             margin-bottom: 25px;
             margin-top: 20px;
             padding: 15px;
-            /* Adicionado padding para melhor visualização do scroll */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            /* Adjusted to auto-fit */
+            gap: 20px;
         }
+
 
         #globalMessage {
             position: fixed;
@@ -493,6 +535,10 @@
             z-index: 1001;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
             display: none;
+            flex-direction: column;
+            /* Ensure content is stacked vertically */
+            justify-content: center;
+            align-items: center;
             animation: fadeInScale 0.3s ease forwards;
         }
 
@@ -500,7 +546,6 @@
             from {
                 opacity: 0;
                 transform: translate(-50%, -50%) scale(0.8);
-                /* Começa menor */
             }
 
             to {
@@ -512,7 +557,6 @@
         #globalMessage p {
             margin-bottom: 25px;
             font-size: 1.4em;
-            /* Um pouco maior */
             font-weight: 500;
         }
 
@@ -557,7 +601,6 @@
             align-items: center;
             font-weight: normal;
             color: var(--text-dark);
-            /* Mais visível */
             cursor: pointer;
         }
 
@@ -587,17 +630,21 @@
         }
 
         .dark-mode header,
-        .dark-mode footer {
+        .dark-mode footer,
+        .dark-mode .mobile-nav {
             background-color: var(--header-footer-dark-bg);
             border-bottom-color: var(--darker-blue);
         }
 
-        .dark-mode .header-icons .icon-btn {
+        .dark-mode .header-icons .icon-btn,
+        .dark-mode .mobile-nav .nav-btn {
             color: var(--text-dark);
         }
 
-        .dark-mode .header-icons .icon-btn:hover {
+        .dark-mode .header-icons .icon-btn:hover,
+        .dark-mode .mobile-nav .nav-btn:hover {
             color: var(--accent-color);
+            background-color: var(--darker-blue);
         }
 
 
@@ -612,8 +659,7 @@
 
         .dark-mode input[type="text"],
         .dark-mode input[type="password"],
-        .dark-mode .dark-mode input[type="email"],
-        /* corrected syntax */
+        .dark-mode input[type="email"],
         .dark-mode textarea,
         .dark-mode select {
             background-color: var(--medium-bg);
@@ -628,7 +674,7 @@
         .dark-mode textarea:focus,
         .dark-mode select:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 63, 110, 188), 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .dark-mode .filter-buttons button,
@@ -694,38 +740,77 @@
         }
 
         /* UserWay Accessibility Widget adjustments */
-        /*
-        O script do UserWay injeta um div com um ID ou classe específica que pode ter estilos fixos.
-        O ID mais comum é 'userway-widget-container'. Vamos forçar o posicionamento para
-        o canto inferior direito e garantir que ele esteja acima de outros elementos.
-        */
         #userway-widget-container {
             bottom: 20px !important;
-            /* Distância da parte inferior */
             right: 20px !important;
-            /* Distância da parte direita */
             left: unset !important;
-            /* Garante que não está fixo à esquerda também */
             top: unset !important;
-            /* Garante que não está fixo ao topo também */
             z-index: 99999 !important;
-            /* Garante que fique acima de outros elementos, use um valor alto */
         }
 
-        /* Media Query para telas menores */
+        /* Media Query para telas menores que 768px (tablets e celulares) */
         @media (max-width: 768px) {
+            header {
+                flex-direction: row;
+                justify-content: flex-start;
+                /* Align logo to start */
+                padding: 10px 15px;
+            }
+
+            .header-logo {
+                margin-left: 10px;
+                /* Adjust logo margin */
+                margin-right: 15px;
+            }
+
+            .header-logo img {
+                height: 60px;
+                /* Smaller logo on mobile */
+            }
+
+            header .header-content {
+                flex-grow: unset;
+                justify-content: center;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 140px);
+                /* Adjust width for logo and icons */
+            }
+
             header h1 {
-                font-size: 1.8em;
-                /* Ajuste para mobile */
+                font-size: 1.6em;
+                /* Smaller title on mobile */
+                text-align: center;
+                width: 100%;
+                white-space: normal;
+                /* Allow title to wrap if necessary */
             }
 
-            .header-icons {
-                gap: 12px;
+            header .header-icons {
+                display: none;
+                /* Hide desktop icons on mobile */
             }
 
-            .header-icons .icon-btn {
-                font-size: 1.5em;
-                /* Ajuste para mobile */
+            .mobile-nav {
+                display: block;
+                /* Show mobile nav */
+                position: relative;
+                /* Stays in normal flow */
+            }
+
+            .mobile-nav ul {
+                flex-wrap: wrap;
+                /* Allow nav items to wrap */
+                gap: 10px;
+                /* Smaller gap for mobile nav buttons */
+                padding: 0 10px;
+            }
+
+            .mobile-nav .nav-btn {
+                flex-grow: 1;
+                /* Allow buttons to grow */
+                text-align: center;
             }
 
             .container {
@@ -733,28 +818,31 @@
                 padding: 18px;
                 width: 98%;
                 border-radius: 10px;
-                /* Adiciona mais espaço para o botão em telas menores no container principal */
                 padding-bottom: 90px;
-                /* Ajuste se o botão do UserWay for maior em mobile */
+            }
+
+            .secretary-tabs {
+                flex-direction: column;
+                /* Stack secretary tabs vertically */
+                align-items: stretch;
+                /* Stretch buttons to full width */
             }
 
             .secretary-tabs button {
-                max-width: unset;
+                max-width: 100%;
                 width: 100%;
                 padding: 10px 15px;
                 font-size: 0.95em;
             }
 
-            /* Adjust grid for smaller screens to prevent overflow */
             #foundItemsList,
             #pendingProofsContainer,
             #registeredItemsContainer {
                 grid-template-columns: 1fr;
-                /* Stack items vertically on small screens */
+                /* Single column on mobile */
                 overflow-x: hidden;
-                /* Ensure content inside grid doesn't cause overflow */
                 padding-right: 0;
-                /* Remove extra padding that might cause scrollbar */
+                /* Remove padding right, scrollbar handled by overflow-y */
             }
 
             .item-card img,
@@ -771,13 +859,11 @@
 
             h2 {
                 font-size: 1.6em;
-                /* Ajuste para mobile */
                 margin-bottom: 20px;
             }
 
             h3 {
                 font-size: 1.3em;
-                /* Ajuste para mobile */
                 margin-bottom: 20px;
             }
 
@@ -791,6 +877,8 @@
             input[type="email"],
             textarea,
             select {
+                width: 100%;
+                /* Full width for inputs */
                 padding: 10px;
                 margin-bottom: 12px;
                 border-radius: 6px;
@@ -804,6 +892,10 @@
             #globalMessage {
                 padding: 25px;
                 border-radius: 12px;
+                width: 90%;
+                /* Make message box responsive */
+                box-sizing: border-box;
+                /* Include padding in width */
             }
 
             #globalMessage p {
@@ -811,11 +903,178 @@
                 margin-bottom: 20px;
             }
 
-            /* Ajuste para o botão de acessibilidade em telas menores */
+            #globalMessage .button-group {
+                flex-direction: column;
+                /* Stack buttons in global message vertically */
+                gap: 10px;
+            }
+
+            #globalMessage button {
+                margin: 0;
+                /* Remove horizontal margin when stacked */
+                width: 100%;
+                /* Full width buttons */
+            }
+
+
             #userway-widget-container {
                 bottom: 15px !important;
-                /* Um pouco mais para cima em mobile */
                 right: 15px !important;
+            }
+        }
+
+        /* Media Query for very small screens (less than 400px) */
+        @media (max-width: 400px) {
+            header {
+                padding: 8px 10px;
+            }
+
+            .header-logo img {
+                height: 45px;
+                /* Even smaller logo for tiny screens */
+            }
+
+            header .header-content {
+                width: calc(100% - 90px);
+                /* Adjust for even smaller logo/icons area */
+            }
+
+            header h1 {
+                font-size: 1.3em;
+                /* More compact title */
+            }
+
+            .mobile-nav ul {
+                gap: 5px;
+                padding: 0 5px;
+            }
+
+            .mobile-nav .nav-btn {
+                font-size: 0.85em;
+                /* Slightly smaller text for nav buttons */
+                padding: 5px 8px;
+            }
+
+            .container {
+                margin: 5px auto;
+                padding: 12px;
+                /* Reduced padding */
+                width: 99%;
+                border-radius: 8px;
+                padding-bottom: 75px;
+                /* Adjusted padding for UserWay */
+            }
+
+            .filter-buttons {
+                gap: 6px;
+                /* Reduced gap for filter buttons */
+                justify-content: space-around;
+                /* Distribute space more evenly */
+            }
+
+            .filter-btn {
+                padding: 7px 12px;
+                /* Smaller padding for filter buttons */
+                font-size: 0.85em;
+                /* Smaller text for filter buttons */
+                flex-basis: auto;
+                /* Allow items to determine their width based on content */
+            }
+
+            .item-card img,
+            .proof-card img {
+                height: 100px;
+                /* Smaller image height in cards */
+                margin-bottom: 10px;
+            }
+
+            .item-card h4,
+            .proof-card p {
+                font-size: 0.95em;
+                /* Smaller headings in cards */
+            }
+
+            .item-card p,
+            .proof-card small {
+                font-size: 0.75em;
+                /* Smaller text in cards */
+            }
+
+            .item-card .button-group {
+                flex-direction: column;
+                /* Stack buttons vertically in item cards */
+                gap: 8px;
+            }
+
+            .item-card .primary,
+            .proof-card .primary,
+            .proof-card .danger {
+                width: 100%;
+                /* Full width for action buttons in cards */
+                margin-top: 10px;
+            }
+
+            button {
+                padding: 7px 12px;
+                /* Smaller general button padding */
+                font-size: 0.9em;
+                /* Smaller general button font size */
+            }
+
+            input[type="text"],
+            input[type="password"],
+            input[type="email"],
+            textarea,
+            select {
+                padding: 8px;
+                margin-bottom: 10px;
+                font-size: 0.9em;
+                /* Smaller font for inputs */
+            }
+
+            label {
+                font-size: 0.85em;
+                /* Smaller font for labels */
+                margin-bottom: 5px;
+            }
+
+            h2 {
+                font-size: 1.3em;
+                /* Smaller H2 */
+                margin-bottom: 15px;
+            }
+
+            h3 {
+                font-size: 1.1em;
+                /* Smaller H3 */
+                margin-bottom: 15px;
+            }
+
+            #globalMessage {
+                padding: 20px;
+                /* Reduced padding for global message */
+                width: 95%;
+                /* Make message box responsive */
+            }
+
+            #globalMessage p {
+                font-size: 0.95em;
+                margin-bottom: 15px;
+            }
+
+            #globalMessage button {
+                font-size: 0.85em;
+                padding: 7px 12px;
+            }
+
+            .category-checkboxes {
+                gap: 10px;
+                /* Reduced gap for checkboxes */
+            }
+
+            .category-checkboxes label {
+                font-size: 0.85em;
+                /* Smaller font for category checkboxes */
             }
         }
     </style>
@@ -823,12 +1082,26 @@
 
 <body>
     <header>
-        <h1><a href="index.html">Achados e Perdidos</a></h1>
+        <div class="header-logo">
+            <img src="/img/logo.png" alt="Logo ETEC">
+        </div>
+        <div class="header-content">
+            <h1><a href="index.html">Achados e Perdidos</a></h1>
+        </div>
         <div class="header-icons">
             <button class="icon-btn" id="darkModeToggle" title="Modo Noturno">🌙</button>
             <button class="icon-btn" id="profileBtn" title="Acesso Secretaria">⚙️</button>
+            <button class="icon-btn" id="logoutBtn" title="Sair" style="display: none;">➡️</button>
         </div>
     </header>
+
+    <nav class="mobile-nav">
+        <ul>
+            <li><button class="nav-btn" id="darkModeToggleMobile" title="Modo Noturno">🌙 Modo Noturno</button></li>
+            <li><button class="nav-btn" id="profileBtnMobile" title="Acesso Secretaria">⚙️ Acesso Secretaria</button></li>
+            <li><button class="nav-btn" id="logoutBtnMobile" title="Sair" style="display: none;">➡️ Sair</button></li>
+        </ul>
+    </nav>
 
     <main class="container">
         <section id="studentHome" class="screen active">
@@ -843,8 +1116,7 @@
                 <button class="secondary filter-btn" data-category="outros">Outros</button>
             </div>
 
-            <div id="foundItemsList"
-                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
+            <div id="foundItemsList">
             </div>
             <p id="noFoundItemsMessage" style="text-align: center; color: #777; margin-top: 20px; display: none;">Nenhum
                 item encontrado no momento.</p>
@@ -902,8 +1174,7 @@
             <div id="proofsList"
                 style="background-color: var(--medium-bg); padding: 25px; border-radius: 12px; margin-top: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
                 <h3 style="text-align: center;">Comprovações de Posse Pendentes</h3>
-                <div id="pendingProofsContainer"
-                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px;">
+                <div id="pendingProofsContainer">
                 </div>
                 <p id="noProofsMessage" style="text-align: center; color: var(--text-light); display: none;">Nenhuma
                     comprovação pendente no momento.</p>
@@ -912,8 +1183,7 @@
             <div id="secretaryItemsList"
                 style="background-color: var(--medium-bg); padding: 25px; border-radius: 12px; margin-top: 25px; display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
                 <h3 style="text-align: center;">Itens Cadastrados</h3>
-                <div id="registeredItemsContainer"
-                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px;">
+                <div id="registeredItemsContainer">
                 </div>
                 <p id="noRegisteredItemsMessage" style="text-align: center; color: var(--text-light); display: none;">
                     Nenhum item cadastrado ainda.</p>
@@ -975,10 +1245,22 @@
 
     <script type="module">
         // Importa as instâncias de 'app' e 'db' do firebaseconfig.js
-        import { app, db } from './firebaseconfig.js';
+        import {
+            app,
+            db
+        } from './firebaseconfig.js';
 
         // Importa as funções específicas do Firestore SDK.
-        import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+        import {
+            collection,
+            getDocs,
+            addDoc,
+            updateDoc,
+            deleteDoc,
+            doc,
+            query,
+            where
+        } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 
         // Variáveis globais para armazenar os dados localmente após serem carregados do Firebase
         let itemsFound = [];
@@ -989,7 +1271,10 @@
             try {
                 const colRef = collection(db, collectionName);
                 const snapshot = await getDocs(colRef);
-                return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                return snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
             } catch (error) {
                 console.error(`Erro ao carregar a coleção '${collectionName}' do Firestore:`, error);
                 return []; // Retorna um array vazio em caso de erro
@@ -1000,7 +1285,10 @@
             try {
                 const colRef = collection(db, collectionName);
                 const docRef = await addDoc(colRef, data);
-                return { id: docRef.id, ...data };
+                return {
+                    id: docRef.id,
+                    ...data
+                };
             } catch (error) {
                 console.error(`Erro ao adicionar documento na coleção '${collectionName}':`, error);
                 throw error;
@@ -1011,7 +1299,10 @@
             try {
                 const docRef = doc(db, collectionName, id);
                 await updateDoc(docRef, data);
-                return { id, ...data }; // Retorna o objeto com o ID para manter a consistência
+                return {
+                    id,
+                    ...data
+                }; // Retorna o objeto com o ID para manter a consistência
             } catch (error) {
                 console.error(`Erro ao atualizar documento '${id}' na coleção '${collectionName}':`, error);
                 throw error;
@@ -1105,43 +1396,37 @@
             if (shouldAddItems) {
                 // Removidas as imagens Base64 dos dummy data para evitar travamentos
                 // Use strings vazias ou URLs de placeholders muito pequenas
-                const dummyItems = [
-                    {
-                        name: 'Celular Samsung',
-                        description: 'Celular preto, tela trincada no canto superior. Modelo antigo.',
-                        location: 'Pátio Principal',
-                        categories: ['eletronicos'],
-                        photo: 'https://via.placeholder.com/100x100?text=Celular' // Exemplo de URL de placeholder
-                    },
-                    {
-                        name: 'Estojo de Lápis',
-                        description: 'Estojo azul com zíper amarelo, contém 3 lápis e uma borracha.',
-                        location: 'Sala 5',
-                        categories: ['material escolar'],
-                        photo: 'https://via.placeholder.com/100x100?text=Estojo'
-                    },
-                    {
-                        name: 'Jaqueta Jeans',
-                        description: 'Jaqueta jeans tamanho M, com um pequeno rasgo no ombro esquerdo.',
-                        location: 'Quadra de Esportes',
-                        categories: ['roupas'],
-                        photo: 'https://via.placeholder.com/100x100?text=Jaqueta'
-                    },
-                    {
-                        name: 'Carteira de Identidade',
-                        description: 'RG em nome de Maria Silva, contém um chip colado na parte de trás.',
-                        location: 'Biblioteca',
-                        categories: ['documentos'],
-                        photo: '' // Exemplo sem foto
-                    },
-                    {
-                        name: 'Chaveiro de Coruja',
-                        description: 'Chaveiro de metal em formato de coruja, com duas chaves pequenas.',
-                        location: 'Corredor Principal',
-                        categories: ['outros'],
-                        photo: 'https://via.placeholder.com/100x100?text=Chaveiro'
-                    }
-                ];
+                const dummyItems = [{
+                    name: 'Celular Samsung',
+                    description: 'Celular preto, tela trincada no canto superior. Modelo antigo.',
+                    location: 'Pátio Principal',
+                    categories: ['eletronicos'],
+                    photo: 'https://via.placeholder.com/100x100?text=Celular' // Exemplo de URL de placeholder
+                }, {
+                    name: 'Estojo de Lápis',
+                    description: 'Estojo azul com zíper amarelo, contém 3 lápis e uma borracha.',
+                    location: 'Sala 5',
+                    categories: ['material escolar'],
+                    photo: 'https://via.placeholder.com/100x100?text=Estojo'
+                }, {
+                    name: 'Jaqueta Jeans',
+                    description: 'Jaqueta jeans tamanho M, com um pequeno rasgo no ombro esquerdo.',
+                    location: 'Quadra de Esportes',
+                    categories: ['roupas'],
+                    photo: 'https://via.placeholder.com/100x100?text=Jaqueta'
+                }, {
+                    name: 'Carteira de Identidade',
+                    description: 'RG em nome de Maria Silva, contém um chip colado na parte de trás.',
+                    location: 'Biblioteca',
+                    categories: ['documentos'],
+                    photo: '' // Exemplo sem foto
+                }, {
+                    name: 'Chaveiro de Coruja',
+                    description: 'Chaveiro de metal em formato de coruja, com duas chaves pequenas.',
+                    location: 'Corredor Principal',
+                    categories: ['outros'],
+                    photo: 'https://via.placeholder.com/100x100?text=Chaveiro'
+                }];
                 for (const item of dummyItems) {
                     await addDocument('itemsFound', item);
                 }
@@ -1224,7 +1509,9 @@
                     undoCallback();
                     globalMessage.style.display = 'none';
                     undoBtn.removeEventListener('click', handler);
-                }, { once: true });
+                }, {
+                    once: true
+                });
             } else {
                 undoBtn.style.display = 'none';
             }
@@ -1234,7 +1521,9 @@
                 if (continueCallback) continueCallback();
                 globalMessage.style.display = 'none';
                 continueBtn.removeEventListener('click', handler);
-            }, { once: true });
+            }, {
+                once: true
+            });
 
             globalMessage.style.display = 'flex';
         }
@@ -1243,9 +1532,43 @@
         document.addEventListener('DOMContentLoaded', () => {
             initializeAppData();
 
-            // Botões do Header
+            // Função para atualizar a visibilidade dos botões de login/logout
+            function updateLoginButtonsVisibility() {
+                const isLoggedIn = localStorage.getItem('isSecretaryLoggedIn') === 'true';
+                document.getElementById('profileBtn').style.display = isLoggedIn ? 'none' : 'block';
+                document.getElementById('profileBtnMobile').style.display = isLoggedIn ? 'none' : 'block';
+                document.getElementById('logoutBtn').style.display = isLoggedIn ? 'block' : 'none';
+                document.getElementById('logoutBtnMobile').style.display = isLoggedIn ? 'block' : 'none';
+            }
+
+            // Chame a função para definir a visibilidade inicial
+            updateLoginButtonsVisibility();
+
+            // Verificar o estado de login ao carregar a página
+            if (localStorage.getItem('isSecretaryLoggedIn') === 'true') {
+                showScreen('secretaryDashboard');
+                showSecretarySubTab('proofsList'); // Exibe a primeira aba da secretaria por padrão
+            }
+
+
+            // Botões do Header (Desktop)
             document.getElementById('profileBtn').addEventListener('click', () => {
-                showScreen('secretaryLogin');
+                if (localStorage.getItem('isSecretaryLoggedIn') === 'true') {
+                    showScreen('secretaryDashboard');
+                    showSecretarySubTab('proofsList');
+                } else {
+                    showScreen('secretaryLogin');
+                }
+            });
+
+            // Botões do Mobile Nav
+            document.getElementById('profileBtnMobile').addEventListener('click', () => {
+                if (localStorage.getItem('isSecretaryLoggedIn') === 'true') {
+                    showScreen('secretaryDashboard');
+                    showSecretarySubTab('proofsList');
+                } else {
+                    showScreen('secretaryLogin');
+                }
             });
 
             // Botões "Voltar para o Início" (usando IDs específicos)
@@ -1253,8 +1576,18 @@
             document.getElementById('backToHomeLoginBtn').addEventListener('click', () => showScreen('studentHome'));
 
 
-            // Modo noturno
+            // Modo noturno (Desktop)
             document.getElementById('darkModeToggle').addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+
+            // Modo noturno (Mobile)
+            document.getElementById('darkModeToggleMobile').addEventListener('click', () => {
                 document.body.classList.toggle('dark-mode');
                 if (document.body.classList.contains('dark-mode')) {
                     localStorage.setItem('darkMode', 'enabled');
@@ -1267,6 +1600,18 @@
             if (localStorage.getItem('darkMode') === 'enabled') {
                 document.body.classList.add('dark-mode');
             }
+
+            // Lógica de Logout
+            function handleLogout() {
+                localStorage.removeItem('isSecretaryLoggedIn'); // Remove a flag do localStorage
+                showGlobalMessage('Sessão encerrada com sucesso.', false, null, () => {
+                    showScreen('studentHome'); // Redireciona para a tela inicial do aluno
+                    updateLoginButtonsVisibility(); // Atualiza a visibilidade dos botões
+                });
+            }
+
+            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+            document.getElementById('logoutBtnMobile').addEventListener('click', handleLogout);
         });
 
         // --- Funções da Tela Inicial do Aluno ---
@@ -1372,7 +1717,7 @@
                 });
             } catch (error) {
                 console.error("Falha ao enviar comprovação:", error);
-                showGlobalMessage('Erro ao enviar comprovação. Tente novamente.', false, null, () => { });
+                showGlobalMessage('Erro ao enviar comprovação. Tente novamente.', false, null, () => {});
             }
         });
 
@@ -1387,8 +1732,14 @@
 
             if (email === SECRETARY_EMAIL && password === SECRETARY_PASSWORD) {
                 alert('Login bem-sucedido!');
+                localStorage.setItem('isSecretaryLoggedIn', 'true'); // Salva a flag no localStorage
                 showScreen('secretaryDashboard');
                 showSecretarySubTab('proofsList');
+                // Adicionado para atualizar a visibilidade dos botões após o login
+                document.getElementById('profileBtn').style.display = 'none';
+                document.getElementById('profileBtnMobile').style.display = 'none';
+                document.getElementById('logoutBtn').style.display = 'block';
+                document.getElementById('logoutBtnMobile').style.display = 'block';
             } else {
                 alert('Email ou senha incorretos.');
             }
@@ -1446,7 +1797,7 @@
                 proofCard.innerHTML = `
                     ${itemAssociated && itemAssociated.photo
                         ? `<img src="${itemAssociated.photo}" alt="${itemAssociated.name}">`
-                        : `<div style="width: 100%; height: 160px; background-color: #ccc; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: #666; margin-bottom: 15px; font-size: 0.9em;">Item sem Imagem ou item original não encontrado</div>`
+                        : `<div style="width: 100%; height: 160px; background-color: #ccc; border-radius: 8px; display: flex; justify-content: center; align-items: center; color: #666; margin-bottom: 15px; font-size: 0.9em;">Sem Imagem</div>`
                     }
                     <p style="font-weight: 600; margin-bottom: 5px;">Item: ${proof.itemName || 'Item Desconhecido'}</p>
                     <p style="font-size: 0.9em; color: var(--text-light); margin-bottom: 5px;"><strong>Aluno:</strong> ${proof.studentName || 'N/A'}</p>
@@ -1473,7 +1824,9 @@
             if (proofIndex > -1) {
                 const proof = proofsOfOwnership[proofIndex];
                 try {
-                    await updateDocument('proofsOfOwnership', proofId, { status: status });
+                    await updateDocument('proofsOfOwnership', proofId, {
+                        status: status
+                    });
                     proofsOfOwnership[proofIndex].status = status;
 
                     // Se a comprovação for aprovada, exclua o item da lista de itens encontrados
@@ -1492,7 +1845,7 @@
                     });
                 } catch (error) {
                     console.error(`Falha ao ${status} comprovação:`, error);
-                    showGlobalMessage(`Erro ao ${status} comprovação. Tente novamente.`, false, null, () => { });
+                    showGlobalMessage(`Erro ao ${status} comprovação. Tente novamente.`, false, null, () => {});
                 }
             }
         }
@@ -1616,7 +1969,7 @@
                 document.querySelectorAll('input[name="itemCategory"]').forEach(cb => cb.checked = false);
             } catch (error) {
                 console.error("Falha ao salvar item:", error);
-                showGlobalMessage('Erro ao salvar item. Tente novamente.', false, null, () => { });
+                showGlobalMessage('Erro ao salvar item. Tente novamente.', false, null, () => {});
             }
         });
 
@@ -1692,7 +2045,7 @@
                     });
                 } catch (error) {
                     console.error("Falha ao excluir item:", error);
-                    showGlobalMessage('Erro ao excluir item. Tente novamente.', false, null, () => { });
+                    showGlobalMessage('Erro ao excluir item. Tente novamente.', false, null, () => {});
                 }
             }
         }
@@ -1715,24 +2068,6 @@
             }
         }, 300);
     </script>
-
-    <style>
-        #userway-widget-container {
-            position: fixed !important;
-            bottom: 20px !important;
-            right: 20px !important;
-            left: unset !important;
-            top: unset !important;
-            z-index: 99999 !important;
-        }
-
-        @media (max-width: 768px) {
-            #userway-widget-container {
-                bottom: 15px !important;
-                right: 15px !important;
-            }
-        }
-    </style>
 </body>
 
 </html>
