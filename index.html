@@ -8,6 +8,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
     <style>
         /* Paleta de Cores Base (Opção A - Contraste e Vibrância) */
         :root {
@@ -82,13 +83,17 @@
         }
 
         /* Reset para box-sizing */
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
         }
 
         /* CSS Geral */
-        html, body {
-            overflow-x: hidden; /* Prevent horizontal scrolling */
+        html,
+        body {
+            overflow-x: hidden;
+            /* Prevent horizontal scrolling */
         }
 
         body {
@@ -116,7 +121,8 @@
             flex-direction: column;
             transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
             /* Adiciona espaço para o botão de acessibilidade na parte inferior do conteúdo principal */
-            padding-bottom: 70px; /* Ajuste este valor conforme o tamanho do botão do UserWay */
+            padding-bottom: 70px;
+            /* Ajuste este valor conforme o tamanho do botão do UserWay */
         }
 
         /* Cabeçalho */
@@ -190,7 +196,8 @@
         footer {
             background-color: var(--primary-color);
             color: #FFFFFF;
-            text-align: center; /* Garante a centralização */
+            text-align: center;
+            /* Garante a centralização */
             padding: 15px 0;
             font-size: 0.9em;
             margin-top: auto;
@@ -397,7 +404,7 @@
             border-radius: 8px;
             /* Cantos arredondados para a imagem */
             margin-bottom: 15px;
-            background-color: var(--border-color);
+            background-color: #ccc; /* Cor de fundo para itens sem imagem ou durante o carregamento */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
             /* Sombra para a imagem */
             border: 1px solid var(--border-color);
@@ -605,7 +612,8 @@
 
         .dark-mode input[type="text"],
         .dark-mode input[type="password"],
-        .dark-mode .dark-mode input[type="email"], /* corrected syntax */
+        .dark-mode .dark-mode input[type="email"],
+        /* corrected syntax */
         .dark-mode textarea,
         .dark-mode select {
             background-color: var(--medium-bg);
@@ -692,13 +700,18 @@
         o canto inferior direito e garantir que ele esteja acima de outros elementos.
         */
         #userway-widget-container {
-            bottom: 20px !important; /* Distância da parte inferior */
-            right: 20px !important; /* Distância da parte direita */
-            left: unset !important; /* Garante que não está fixo à esquerda também */
-            top: unset !important; /* Garante que não está fixo ao topo também */
-            z-index: 99999 !important; /* Garante que fique acima de outros elementos, use um valor alto */
+            bottom: 20px !important;
+            /* Distância da parte inferior */
+            right: 20px !important;
+            /* Distância da parte direita */
+            left: unset !important;
+            /* Garante que não está fixo à esquerda também */
+            top: unset !important;
+            /* Garante que não está fixo ao topo também */
+            z-index: 99999 !important;
+            /* Garante que fique acima de outros elementos, use um valor alto */
         }
-        
+
         /* Media Query para telas menores */
         @media (max-width: 768px) {
             header h1 {
@@ -721,7 +734,8 @@
                 width: 98%;
                 border-radius: 10px;
                 /* Adiciona mais espaço para o botão em telas menores no container principal */
-                padding-bottom: 90px; /* Ajuste se o botão do UserWay for maior em mobile */
+                padding-bottom: 90px;
+                /* Ajuste se o botão do UserWay for maior em mobile */
             }
 
             .secretary-tabs button {
@@ -735,9 +749,12 @@
             #foundItemsList,
             #pendingProofsContainer,
             #registeredItemsContainer {
-                grid-template-columns: 1fr; /* Stack items vertically on small screens */
-                overflow-x: hidden; /* Ensure content inside grid doesn't cause overflow */
-                padding-right: 0; /* Remove extra padding that might cause scrollbar */
+                grid-template-columns: 1fr;
+                /* Stack items vertically on small screens */
+                overflow-x: hidden;
+                /* Ensure content inside grid doesn't cause overflow */
+                padding-right: 0;
+                /* Remove extra padding that might cause scrollbar */
             }
 
             .item-card img,
@@ -796,7 +813,8 @@
 
             /* Ajuste para o botão de acessibilidade em telas menores */
             #userway-widget-container {
-                bottom: 15px !important; /* Um pouco mais para cima em mobile */
+                bottom: 15px !important;
+                /* Um pouco mais para cima em mobile */
                 right: 15px !important;
             }
         }
@@ -1010,32 +1028,50 @@
             }
         }
 
-        // --- Funções de Imagem (AGORA SALVANDO COMO BASE64 NO FIRESTORE) ---
+        // --- Funções de Imagem (AGORA COM COMPRESSÃO) ---
         async function uploadImage(file) {
-            return new Promise((resolve, reject) => {
+            return new Promise(async (resolve, reject) => {
                 if (!file) {
                     resolve(''); // Retorna string vazia se nenhum arquivo for fornecido
                     return;
                 }
 
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    const base64String = reader.result;
-                    // Limite de 1MB para documentos do Firestore, base64 é maior que o binário.
-                    // Para fins de demonstração, não há validação de tamanho aqui.
-                    console.log("Imagem convertida para Base64. Tamanho aproximado (chars):", base64String.length);
-                    resolve(base64String);
-                };
-                reader.onerror = (error) => {
-                    console.error("Erro ao ler o arquivo para Base64:", error);
-                    reject(''); // Rejeita ou resolve com vazio em caso de erro
-                };
-                reader.readAsDataURL(file); // Lê o arquivo como URL de dados (Base64)
+                try {
+                    // Opções de compressão:
+                    const options = {
+                        maxSizeMB: 0.1, // Alvo de tamanho máximo para a imagem comprimida (0.1 MB = 100 KB)
+                        maxWidthOrHeight: 800, // Largura ou altura máxima da imagem em pixels
+                        useWebWorker: true // Tenta usar Web Worker para compressão em segundo plano (melhora performance)
+                    };
+
+                    console.log(`Original file size: ${file.size / 1024 / 1024} MB`);
+
+                    // Comprime a imagem
+                    const compressedFile = await imageCompression(file, options);
+                    console.log(`Compressed file size: ${compressedFile.size / 1024 / 1024} MB`);
+
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        const base64String = reader.result;
+                        // Atenção: O limite de 1MB do Firestore ainda se aplica à string Base64.
+                        // Imagens muito detalhadas ou grandes, mesmo comprimidas, podem exceder esse limite.
+                        console.log("Imagem convertida para Base64. Tamanho aproximado (chars):", base64String.length);
+                        resolve(base64String);
+                    };
+                    reader.onerror = (error) => {
+                        console.error("Erro ao ler o arquivo para Base64:", error);
+                        reject('');
+                    };
+                    reader.readAsDataURL(compressedFile); // Lê o arquivo COMPRIMIDO como URL de dados (Base64)
+                } catch (error) {
+                    console.error("Erro durante a compressão da imagem:", error);
+                    reject('');
+                }
             });
         }
 
         // Não há necessidade de "deletar" Base64 do Storage, apenas da entrada do Firestore.
-        async function deleteImage(photoUrl) {
+        function deleteImage(photoUrl) {
             console.warn("Nenhuma imagem real para excluir (está embutida em Base64).");
             return; // Não faz nada
         }
@@ -1067,29 +1103,29 @@
             let shouldAddProofs = currentProofs.length === 0;
 
             if (shouldAddItems) {
+                // Removidas as imagens Base64 dos dummy data para evitar travamentos
+                // Use strings vazias ou URLs de placeholders muito pequenas
                 const dummyItems = [
                     {
                         name: 'Celular Samsung',
                         description: 'Celular preto, tela trincada no canto superior. Modelo antigo.',
                         location: 'Pátio Principal',
                         categories: ['eletronicos'],
-                        // Imagens dummy agora como Base64 (pequenas ou placeholders)
-                        // Atenção: imagens grandes em Base64 estouram o limite do Firestore
-                        photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8HmHNAAAAA1BMVEX///+ntrA5AAAANElEQVR4nO3BMQEAAADCoPzRbQzhxAAAAAAAADg+F+cAAAH5kQAAAAAAAAAAAAAAAAAAAAAAAADg8p/1AgI+a+YnAAAAAElFTkSuQmCC' // Pequena imagem preta
+                        photo: 'https://via.placeholder.com/100x100?text=Celular' // Exemplo de URL de placeholder
                     },
                     {
                         name: 'Estojo de Lápis',
                         description: 'Estojo azul com zíper amarelo, contém 3 lápis e uma borracha.',
                         location: 'Sala 5',
                         categories: ['material escolar'],
-                        photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8HmHNAAAAA1BMVEX///+ntrA5AAAANElEQVR4nO3BMQEAAADCoPzRbQzhxAAAAAAAADg+F+cAAAH5kQAAAAAAAAAAAAAAAAAAAAAAAADg8p/1AgI+a+YnAAAAAElFTkSuQmCC' // Pequena imagem preta
+                        photo: 'https://via.placeholder.com/100x100?text=Estojo'
                     },
                     {
                         name: 'Jaqueta Jeans',
                         description: 'Jaqueta jeans tamanho M, com um pequeno rasgo no ombro esquerdo.',
                         location: 'Quadra de Esportes',
                         categories: ['roupas'],
-                        photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8HmHNAAAAA1BMVEX///+ntrA5AAAANElEQVR4nO3BMQEAAADCoPzRbQzhxAAAAAAAADg+F+cAAAH5kQAAAAAAAAAAAAAAAAAAAAAAAADg8p/1AgI+a+YnAAAAAElFTkSuQmCC' // Pequena imagem preta
+                        photo: 'https://via.placeholder.com/100x100?text=Jaqueta'
                     },
                     {
                         name: 'Carteira de Identidade',
@@ -1103,7 +1139,7 @@
                         description: 'Chaveiro de metal em formato de coruja, com duas chaves pequenas.',
                         location: 'Corredor Principal',
                         categories: ['outros'],
-                        photo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8HmHNAAAAA1BMVEX///+ntrA5AAAANElEQVR4nO3BMQEAAADCoPzRbQzhxAAAAAAAADg+F+cAAAH5kQAAAAAAAAAAAAAAAAAAAAAAAADg8p/1AgI+a+mNAAAAAElFTkSuQmCC' // Pequena imagem preta
+                        photo: 'https://via.placeholder.com/100x100?text=Chaveiro'
                     }
                 ];
                 for (const item of dummyItems) {
@@ -1444,6 +1480,7 @@
                     if (status === 'aprovado') {
                         const itemToDeleteId = proof.itemId;
                         if (itemToDeleteId) {
+                            // Não precisamos chamar deleteImage aqui, pois não estamos usando Storage
                             await deleteDocument('itemsFound', itemToDeleteId);
                             itemsFound = itemsFound.filter(item => item.id !== itemToDeleteId); // Atualiza a lista localmente
                         }
@@ -1513,7 +1550,7 @@
             const location = document.getElementById('itemLocation').value;
             const categories = Array.from(document.querySelectorAll('input[name="itemCategory"]:checked')).map(cb => cb.value);
             const photoFile = document.getElementById('itemPhoto').files[0];
-            let currentPhotoURL = document.getElementById('itemPhotoPreview').src;
+            let currentPhotoURL = document.getElementById('itemPhotoPreview').src; // Pode ser um data URL ou um placeholder
 
             if (categories.length === 0) {
                 alert('Selecione ao menos uma categoria para o item.');
@@ -1523,15 +1560,12 @@
             let photoToSave = '';
 
             if (photoFile) {
-                // Se um novo arquivo foi selecionado, converte para Base64 e salva.
+                // Se um novo arquivo foi selecionado, comprime e converte para Base64
                 photoToSave = await uploadImage(photoFile);
             } else if (itemId) {
-                // Se está editando e NENHUM novo arquivo foi selecionado, mantém a foto existente se for uma Base64 válida
-                // ou um placeholder externo que já estava lá (não um '#' ou placeholder temporário do FileReader).
-                if (currentPhotoURL && !currentPhotoURL.includes('placeholder.com') && currentPhotoURL.startsWith('data:image/')) {
-                    photoToSave = currentPhotoURL;
-                } else if (currentPhotoURL && currentPhotoURL.includes('placeholder.com')) {
-                    // Se era um placeholder do sistema, mantém o mesmo.
+                // Se está editando e NENHUM novo arquivo foi selecionado, mantém a foto existente (se for um data URL válido ou placeholder)
+                // A URL '#', ou "blob:http", ou "about:blank" indica que não há uma imagem real definida.
+                if (currentPhotoURL && currentPhotoURL !== '#' && !currentPhotoURL.startsWith('blob:') && !currentPhotoURL.startsWith('about:')) {
                     photoToSave = currentPhotoURL;
                 }
             }
@@ -1542,7 +1576,7 @@
                 description,
                 location,
                 categories,
-                photo: photoToSave // Agora conterá Base64 ou string vazia/placeholder
+                photo: photoToSave // Conterá a imagem Base64 comprimida ou string vazia/placeholder
             };
 
             try {
@@ -1559,6 +1593,7 @@
                     itemsFound.push(newItem);
                     showGlobalMessage('Item adicionado com sucesso!', true, async () => {
                         try {
+                            // Não precisamos chamar deleteImage aqui, pois não estamos usando Storage
                             await deleteDocument('itemsFound', newItem.id);
                             itemsFound = itemsFound.filter(item => item.id !== newItem.id);
                             renderFoundItems();
@@ -1621,7 +1656,7 @@
                     document.getElementById('itemPhotoPreview').src = '#';
                     document.getElementById('itemPhotoPreview').style.display = 'none';
                 }
-                document.getElementById('itemPhoto').value = '';
+                document.getElementById('itemPhoto').value = ''; // Limpa o input de arquivo
                 document.getElementById('addItemSubmitBtn').textContent = 'Salvar Alterações';
             }
         }
@@ -1631,6 +1666,7 @@
             if (itemIndex > -1) {
                 const deletedItem = itemsFound[itemIndex];
                 try {
+                    // Não precisamos chamar deleteImage aqui, pois não estamos usando Storage
                     await deleteDocument('itemsFound', id);
                     itemsFound.splice(itemIndex, 1);
 
@@ -1641,7 +1677,7 @@
                                 description: deletedItem.description,
                                 location: deletedItem.location,
                                 categories: deletedItem.categories,
-                                photo: deletedItem.photo
+                                photo: deletedItem.photo // A Base64 existente é re-utilizada ou vazia
                             });
                             itemsFound.splice(itemIndex, 0, restoredItem);
                             renderSecretaryItems();
@@ -1661,18 +1697,8 @@
             }
         }
     </script>
-    <script data-cky-tag="UserWay" data-uw-rm-ext-skip-init="true"
-        src="https://cdn.userway.org/widget.js" data-uw-global-object="UserWay">
-    </script>
-
-    <script type="module" src="./firebaseconfig.js"></script>
-
-    <script type="module">
-        // O conteúdo do script principal permanece inalterado
-    </script>
-
-    <script data-cky-tag="UserWay" data-uw-rm-ext-skip-init="true"
-        src="https://cdn.userway.org/widget.js" data-uw-global-object="UserWay">
+    <script data-cky-tag="UserWay" data-uw-rm-ext-skip-init="true" src="https://cdn.userway.org/widget.js"
+        data-uw-global-object="UserWay">
     </script>
 
     <script>
@@ -1708,4 +1734,5 @@
         }
     </style>
 </body>
+
 </html>
